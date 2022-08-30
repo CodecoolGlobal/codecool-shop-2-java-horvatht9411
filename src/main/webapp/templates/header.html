@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<div th:fragment="copy">
+    <nav class="navbar">
+        <a href="/" class="navbar-brand"><img src="/static/img/logo2.png" alt=""></a>
+        <form action="/">
+        <input class="navbar-searchbar" type="text" id="search-input">
+            <button class="button-search" type="submit"><i class='fa-solid fa-magnifying-glass'></i></button>
+        </form>
+        <div class="navbar-toolbox">
+        <a href="/" class="nav-link">test</a>
+        <a href="/" class="nav-link">test</a>
+        <a href="/" class="nav-link"><i class="fa-solid fa-cart-shopping"></i> cart</a>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
