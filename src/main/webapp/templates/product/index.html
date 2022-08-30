@@ -44,7 +44,7 @@
         <label for="category">Kategória</label>
         <select name="category" id="category">
             <option value="all">Minden kategória</option>
-            <option th:each="cat : ${category}" th:value="${cat.name}" th:text="${cat.name}"/>
+            <option th:each="cat : ${category}" th:value="${cat.id}" th:text="${cat.name}"/>
         </select>
     </div>
 
@@ -52,7 +52,7 @@
         <label for="supplier">Beszállító</label>
         <select name="supplier" id="supplier">
             <option value="all">Minden beszállító</option>
-            <option th:each="supplier : ${supplier}" th:value="${supplier.name}" th:text="${supplier.name}"/>
+            <option th:each="supplier : ${supplier}" th:value="${supplier.id}" th:text="${supplier.name}"/>
         </select>
     </div>
 
