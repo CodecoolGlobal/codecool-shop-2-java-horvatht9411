@@ -20,12 +20,7 @@ public class Order {
     }
 
     public void addItemToOrder(OrderItem orderItem) {
-        if (cart.containsKey(orderItem)) {
-            int value = cart.get(orderItem);
-            cart.put(orderItem, value + 1);
-        } else {
-            cart.put(orderItem, 1);
-        }
+        cart.put(orderItem, cart.getOrDefault(orderItem, 0) + 1);
     }
 
     public int getTotalCartQuantity() {
