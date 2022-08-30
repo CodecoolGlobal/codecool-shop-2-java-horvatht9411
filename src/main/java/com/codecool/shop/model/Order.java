@@ -4,32 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Order {
-
     private final Map<OrderItem, Integer> cart;
     private static Order order;
 
-    public Order() {
+    public Order(OrderItem orderItem) {
         this.cart = new HashMap<>();
+        cart.put(orderItem, 1);
     }
 
-    public static Order getInstance() {
+    public static Order getInstance(OrderItem orderItem) {
         if (order == null) {
-            order = new Order();
+            order = new Order(orderItem);
         }
         return order;
     }
 
-    private boolean hasItem(OrderItem orderItem) {
-        for (OrderItem item : cart.keySet()) {
-            if (item == orderItem) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void addItemToOrder(OrderItem orderItem) {
-        if (hasItem(orderItem)) {
+        if (cart.containsKey(orderItem)) {
             int value = cart.get(orderItem);
             cart.put(orderItem, value + 1);
         } else {
@@ -40,4 +31,5 @@ public class Order {
     public int getTotalCartQuantity() {
         return cart.values().stream().reduce(Integer::sum).orElse(0);
     }
+
 }
