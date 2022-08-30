@@ -1,10 +1,14 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
     <meta charset="utf-8"/>
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>der Fischervereinigung</title>
+
+    <title>Codecool Shop</title>
+
+    <script src="/static/js/filter.js" defer></script>
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -33,8 +37,21 @@
 <div th:replace="header.html :: copy"></div>
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+
+    <div id="select-category">
+        <label for="category">Kateg�ria</label>
+        <select name="category" id="category">
+            <option value="all">Minden kateg�ria</option>
+            <option th:each="cat : ${category}" th:value="${cat.id}" th:text="${cat.name}"/>
+        </select>
+    </div>
+
+    <div id="select-supplier">
+        <label for="supplier">Besz�ll�t�</label>
+        <select name="supplier" id="supplier">
+            <option value="all">Minden besz�ll�t�</option>
+            <option th:each="supplier : ${supplier}" th:value="${supplier.id}" th:text="${supplier.name}"/>
+        </select>
     </div>
 
     <div id="products" class="row">
