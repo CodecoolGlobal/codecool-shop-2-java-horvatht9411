@@ -26,4 +26,11 @@ public class ProductService{
     }
 
 
+    public List<ProductCategory> getAllProductCategory() {
+        return productCategoryDao.getAll();
+    }
+
+    public List<Product> getAllProduct() {
+        return productDao.getAll();
+    }
 }
