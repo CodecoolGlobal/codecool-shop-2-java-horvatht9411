@@ -6,16 +6,15 @@ import java.util.Map;
 public class Order {
 
     private final Map<OrderItem, Integer> cart;
-    private Order order;
+    private static Order order;
 
-    public Order(OrderItem orderItem) {
+    public Order() {
         this.cart = new HashMap<>();
-        cart.put(orderItem, 1);
     }
 
-    public Order getInstance(OrderItem orderItem) {
+    public static Order getInstance() {
         if (order == null) {
-            order = new Order(orderItem);
+            order = new Order();
         }
         return order;
     }
@@ -36,5 +35,9 @@ public class Order {
         } else {
             cart.put(orderItem, 1);
         }
+    }
+
+    public int getTotalCartQuantity() {
+        return cart.values().stream().reduce(Integer::sum).orElse(0);
     }
 }
