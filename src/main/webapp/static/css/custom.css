@@ -60,3 +60,23 @@
 {
     margin: 0 0 11px;
 }
+
+.navbar{
+    display: flex;
+    flex-wrap: wrap;
+}
+.navbar-searchbar{
+    border-radius: 1em;
+    border: solid 1px;
+    padding: 0 1em;
+}
+.button-search{
+    all: unset;
+    transform: translateX(-200%);
+}.button-search:focus{
+    all: unset;
+}
+.navbar-toolbox{
+    display: flex;
+    flex-wrap: wrap;
+}
