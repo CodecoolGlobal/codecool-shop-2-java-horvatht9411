@@ -30,28 +30,26 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <script src="https://kit.fontawesome.com/b0236555a9.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
-</div>
+<div th:replace="header.html :: copy"></div>
 
 <div class="container">
 
     <div id="select-category">
-        <label for="category">Kategória</label>
+        <label for="category">Kategï¿½ria</label>
         <select name="category" id="category">
-            <option value="all">Minden kategória</option>
+            <option value="all">Minden kategï¿½ria</option>
             <option th:each="cat : ${category}" th:value="${cat.id}" th:text="${cat.name}"/>
         </select>
     </div>
 
     <div id="select-supplier">
-        <label for="supplier">Beszállító</label>
+        <label for="supplier">Beszï¿½llï¿½tï¿½</label>
         <select name="supplier" id="supplier">
-            <option value="all">Minden beszállító</option>
+            <option value="all">Minden beszï¿½llï¿½tï¿½</option>
             <option th:each="supplier : ${supplier}" th:value="${supplier.id}" th:text="${supplier.name}"/>
         </select>
     </div>
