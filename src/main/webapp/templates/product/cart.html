@@ -35,6 +35,11 @@
                     </div>
                 </td>
                 <td class="price-sum" th:text="${item.defaultPrice * cart.get(item)}"></td>
+                <td>
+                    <button th:data-item-id="${item.id}" class="btn btn-success delete-item">
+                        Töröl
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
