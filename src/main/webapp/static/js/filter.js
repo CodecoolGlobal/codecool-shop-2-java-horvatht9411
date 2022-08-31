@@ -4,7 +4,7 @@ const content = document.querySelector("#products");
 document.querySelector("#category").addEventListener("change", async evt => {
     let selectedCategoryId = evt.target.selectedIndex;
     let selectedCategory = (evt.target[selectedCategoryId].dataset.api);
-    let category = await changeItemCategory(selectedCategory)
+    let category = await changeItemCategory(selectedCategoryId)
     cardBuilder(category);
 } );
 
@@ -15,7 +15,6 @@ document.querySelector("#supplier").addEventListener("change", evt => {
 
 function changeItemCategory(category){
     const url = `/api/category?category=${category}`;
-    console.log(url);
     return apiGet(url);
 }
 
