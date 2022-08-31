@@ -51,6 +51,18 @@ public class ApiController extends HttpServlet {
                 String var = new Gson().toJson(cartQuantity);
                 out.println(var);
                 break;
+
+            case "/api/removeFromCart":
+                int id = Integer.parseInt(request.getParameter("id"));
+                Product deletedProduct = cart.keySet()
+                        .stream()
+                        .filter(item -> item.getId() == id).findFirst().orElse(null);
+                cart.remove(deletedProduct);
+                System.out.println(cart);
+                session.setAttribute("cart", cart);
+                String data = new Gson().toJson(cart);
+                out.println(data);
+                break;
         }
         out.flush();
     }
