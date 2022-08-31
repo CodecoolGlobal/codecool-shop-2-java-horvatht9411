@@ -13,7 +13,9 @@ async function apiPost(url, payload) {
         }
     });
     if (response.ok) {
-        return await response.json();
+        return response.json();
+    } else {
+        console.log(response.statusText);
     }
 }
 
@@ -23,17 +25,16 @@ async function editQuantity(id, data) {
 
 async function editCart() {
     for (let input of itemQuantity) {
-        input.addEventListener('input', async (e) => {
-                let productId = e.currentTarget.dataset.prodId;
-                let quantity = e.currentTarget.value;
-                let unitPrice = e.currentTarget.parentNode.parentNode.parentNode.children[2].textContent;
-                let itemSum = parseFloat(unitPrice) * parseFloat(quantity);
-                e.currentTarget.parentNode.parentNode.parentNode.children[5].textContent = itemSum.toString();
-                let total = updateTotalPrice();
-                totalPrice.textContent = total.toString();
-                await editQuantity(productId, quantity);
-            }
-        );
+        input.addEventListener('change', async (e) => {
+            let productId = e.currentTarget.dataset.prodId;
+            let quantity = parseInt(e.currentTarget.value);
+            let unitPrice = e.currentTarget.closest("tr").children[2].textContent;
+            let totalByItem = parseFloat(unitPrice) * quantity;
+            let itemTotal = e.currentTarget.closest("tr").children[5];
+            itemTotal.textContent = totalByItem.toString();
+            totalPrice.textContent = updateTotalPrice().toString();
+            await editQuantity(productId, quantity);
+        });
     }
 }
 
@@ -57,5 +58,7 @@ function totalPrices() {
     currency.textContent = ` ${itemCurrency.textContent}`;
 }
 
-totalPrices();
-editCart();
+window.onload = async () => {
+    totalPrices();
+    await editCart();
+}
