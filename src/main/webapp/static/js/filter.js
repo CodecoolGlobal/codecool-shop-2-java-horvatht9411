@@ -1,4 +1,4 @@
-const content = document.querySelector("#products");
+const content = document.querySelector(".container");
 
 document.querySelector("#category").addEventListener("change", async evt => {
     let selectedCategoryId = evt.target.selectedIndex;
@@ -32,22 +32,44 @@ function cardBuilder(category) {
     console.log(category);
     content.innerHTML = "";
     for (const cat of category) {
-        let cardItem = createDiv("card_item");
-        let card = createDiv("card_inner");
-        let title = createDiv("title");
-        let time = createDiv("time_ago");
-        let author = createDiv("author");
-        let link = createElement("a");
-        link.href = cat["url"];
-        link.innerText = cat["title"];
-        title.append(link);
-        time.innerText = cat["time_ago"];
-        author.innerText = cat["user"];
-        if (author.innerText === "undefined") {
-            card.append(title, time);
-        } else {
-            card.append(title, time, author);
-        }
+        console.log(cat);
+        console.log(cat["id"]);
+        console.log(cat[0]);
+        let cardItem = createDiv("col");
+        let card = createDiv("card");
+        let header = createDiv("card-header");
+        let title = createElement("h4");
+        title.classList.add("card-title");
+        title.innerText = cat["name"];
+        header.append(title);
+        let headerText = createElement("p");
+        headerText.classList.add("card-text");
+        header.append(headerText);
+        let cardText = createDiv("card-text");
+        let cardTextParagraph = createElement("p");
+        cardTextParagraph.classList.add("lead");
+        cardTextParagraph.innerText = cat["defaultPrice"] + cat["defaultCurrency"];
+        cardText.append(cardTextParagraph);
+        let cardText2 = createDiv("card-text");
+        let button = createElement("a");
+        button.classList.add("btn");
+        button.dataset.prodId = cat["id"];
+        button.innerText = "Add to cart";
+        cardText2.append(button);
+
+        let cardBody = createDiv("card-body");
+        cardBody.append(cardText);
+        cardBody.append(cardText2);
+
+
+        let image = createElement("img");
+        image.src = cat["imgURL"];
+
+
+        card.append(image);
+        card.append(header);
+        card.append(cardBody);
+
         cardItem.append(card);
         content.append(cardItem);
     }

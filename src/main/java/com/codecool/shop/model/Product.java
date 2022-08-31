@@ -1,6 +1,5 @@
 package com.codecool.shop.model;
 
-import java.math.BigDecimal;
 import java.util.Currency;
 
 public class Product extends BaseModel {
@@ -13,10 +12,10 @@ public class Product extends BaseModel {
 
     public Product(String name, int defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier, String imgURL) {
         super(name, description);
-        this.imgURL = imgURL;
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
+        this.setImgURL(imgURL);
     }
 
     public int getDefaultPrice() {
@@ -67,6 +66,10 @@ public class Product extends BaseModel {
         this.supplier.addProduct(this);
     }
 
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
+    }
+
     @Override
     public String toString() {
         return String.format("id: %1$d, " +
@@ -74,12 +77,15 @@ public class Product extends BaseModel {
                         "defaultPrice: %3$d, " +
                         "defaultCurrency: %4$s, " +
                         "productCategory: %5$s, " +
-                        "supplier: %6$s",
+                        "supplier: %6$s, " +
+                        "imgURL: %7$s" ,
+
                 this.id,
                 this.name,
                 this.defaultPrice,
                 this.defaultCurrency.toString(),
                 this.productCategory.getName(),
-                this.supplier.getName());
+                this.supplier.getName(),
+                this.imgURL);
     }
 }
