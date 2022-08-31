@@ -9,6 +9,7 @@
     <title>Codecool Shop</title>
 
     <script src="/static/js/filter.js" defer></script>
+    <script src="/static/js/cart.js" defer></script>
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -39,10 +40,10 @@
 <div class="container">
 
     <div id="select-category">
-        <label for="category">Kateg�ria</label>
+        <label for="category">Kategória</label>
         <select name="category" id="category">
-            <option value="all">Minden kateg�ria</option>
-            <option th:each="cat : ${category}" th:value="${cat.id}" th:text="${cat.name}"/>
+            <option value="all">Minden kategória</option>
+            <option th:each="cat : ${category}" th:value="${cat.id}" th:attr="data-api=${cat.department}" th:text="${cat.name}"/>
         </select>
     </div>
 
@@ -68,7 +69,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a th:data-prod-id="${prod.id}" class="btn btn-success add-to-cart" href="#">Add to cart</a>
                     </div>
                 </div>
             </div>
