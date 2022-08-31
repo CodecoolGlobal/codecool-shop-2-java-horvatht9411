@@ -12,11 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
-    private Map<Product, Integer> cart;
+    private Map<Product, Integer> cart = new HashMap<>();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
