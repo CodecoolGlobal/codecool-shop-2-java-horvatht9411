@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <script src="/static/js/display_cart.js" defer></script>
+</head>
+<body>
+<div>
+    <h4>Rendelés</h4>
+    <a class="btn btn-success" href="/checkout">Regisztráció</a>
+    <a class="btn btn-success" href="/payment">Pénztár</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Termékkód</th>
+                <th>Név</th>
+                <th>Egységár</th>
+                <th></th>
+                <th>Darab</th>
+                <th>Összeg</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item: ${cart.keySet()}">
+                <td th:text="${item.id}" />
+                <td th:text="${item.name}" />
+                <td th:text="${item.defaultPrice}" />
+                <td class="item-currency" th:text="${item.defaultCurrency}" />
+                <td th:text="${cart.get(item)}" />
+                <td class="price-sum" th:text="${item.defaultPrice * cart.get(item)}" />
+            </tr>
+        </tbody>
+    </table>
+    <p>Végösszeg:<span id="total-price"></span><span id="currency"></span></p>
+
+</div>
+</body>
+</html>
