@@ -1,7 +1,6 @@
 async function apiGet(url) {
     const response = await fetch(url);
     if (response.ok) {
-        console.log(response);
         return response.json();
     }
 }

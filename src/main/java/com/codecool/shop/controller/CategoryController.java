@@ -6,8 +6,11 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.service.ProductService;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/api/category"})
 public class CategoryController extends HttpServlet {
@@ -29,9 +33,11 @@ public class CategoryController extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-
         int categoryId = Integer.parseInt(request.getParameter("category"));
-        String json = new Gson().toJson(String.valueOf(productService.getProductsForCategory(categoryId)));
+
+        List<Product> categories = productService.getProductsForCategory(categoryId);
+
+        String json = new Gson().toJson(String.valueOf(categories));
 
         out.println(json);
     }
