@@ -3,12 +3,12 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SupplierDaoMem implements SupplierDao {
 
-    private List<Supplier> data = new ArrayList<>();
+    private Set<Supplier> data = new HashSet<>();
     private static SupplierDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -40,7 +40,7 @@ public class SupplierDaoMem implements SupplierDao {
     }
 
     @Override
-    public List<Supplier> getAll() {
+    public Set<Supplier> getAll() {
         return data;
     }
 }
