@@ -39,10 +39,10 @@
 <div class="container">
 
     <div id="select-category">
-        <label for="category">Kateg�ria</label>
+        <label for="category">Kategória</label>
         <select name="category" id="category">
-            <option value="all">Minden kateg�ria</option>
-            <option th:each="cat : ${category}" th:value="${cat.id}" th:text="${cat.name}"/>
+            <option value="all">Minden kategória</option>
+            <option th:each="cat : ${category}" th:value="${cat.id}" th:attr="data-api=${cat.department}" th:text="${cat.name}"/>
         </select>
     </div>
 
