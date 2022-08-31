@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.model.Product;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,14 +23,11 @@ public class ApiPostController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("proba");
+        PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
         HttpSession session = req.getSession();
-        String body = inputStreamToString(req.getInputStream());
-        System.out.println(body);
-
         if (session.getAttribute("cart") != null) {
             cart = (Map<Product, Integer>) session.getAttribute("cart");
         }
@@ -37,11 +36,15 @@ public class ApiPostController extends HttpServlet {
         Product updatedProduct = cart.keySet()
                 .stream()
                 .filter(product -> product.getId() == productId).findFirst().orElse(null);
-        cart.put(updatedProduct, Integer.valueOf(body));
+        String updatedQuantity = inputStreamToString(req.getInputStream());
+        cart.put(updatedProduct, Integer.valueOf(updatedQuantity));
+
         session.setAttribute("cart", cart);
 
+        String json = new Gson().toJson("ok");
+        out.println(json);
+        out.flush();
     }
-
 
     private static int retrieveProductId(HttpServletRequest req) {
         String pathInfo = req.getPathInfo();
