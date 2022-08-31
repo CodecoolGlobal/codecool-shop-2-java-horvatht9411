@@ -13,9 +13,9 @@ document.querySelector("#supplier").addEventListener("change", evt => {
     console.log(evt.target.value);
 })
 
-function changeItemCategory(category){
+async function changeItemCategory(category){
     const url = `/api/category?category=${category}`;
-    return apiGet(url);
+    return await apiGet(url);
 }
 
 
@@ -30,7 +30,7 @@ function createDiv(string){
 }
 
 function cardBuilder(news){
-    console.log("TODO")
+    console.log(news)
     content.innerHTML = "";
     for (const entry of news){
         let cardItem = createDiv("card_item");
