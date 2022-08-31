@@ -3,6 +3,8 @@ const currency = document.querySelector("#currency");
 const itemCurrency = document.querySelector(".item-currency");
 const priceSum = document.querySelectorAll(".price-sum");
 const itemQuantity = document.querySelectorAll(".quantity");
+const deleteButton = document.querySelectorAll(".delete-item");
+const tableBody = document.querySelector("tbody");
 
 async function apiPost(url, payload) {
     let response = await fetch(url, {
@@ -19,8 +21,21 @@ async function apiPost(url, payload) {
     }
 }
 
+async function apiGet(url) {
+    const response = await fetch(url);
+    if (response.ok) {
+        return response.json();
+    } else {
+        console.log(response.statusText);
+    }
+}
+
 async function editQuantity(id, data) {
-    return await apiPost(`/api/editCart/${id}`, data)
+    return await apiPost(`/api/editCart/${id}`, data);
+}
+
+async function deleteItem(id) {
+    return await apiGet(`/api/removeFromCart?id=${id}`);
 }
 
 async function editCart() {
@@ -49,6 +64,17 @@ function updateTotalPrice() {
     return total;
 }
 
+async function deleteItemFromCart() {
+    for (let button of deleteButton) {
+        button.addEventListener('click', async (e) => {
+            let productId = e.currentTarget.dataset.itemId;
+            let itemRow = e.currentTarget.closest("tr");
+            tableBody.removeChild(itemRow);
+            await deleteItem(productId);
+        });
+    }
+}
+
 function totalPrices() {
     let total = 0;
     for (let price of priceSum) {
@@ -61,4 +87,5 @@ function totalPrices() {
 window.onload = async () => {
     totalPrices();
     await editCart();
+    await deleteItemFromCart();
 }
