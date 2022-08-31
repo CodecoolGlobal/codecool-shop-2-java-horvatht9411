@@ -16,9 +16,9 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/api/addToCart", "/api/removeFromCart", "/api/deleteCart", "/api/editCart"})
+@WebServlet(urlPatterns = {"/api/addToCart", "/api/cartQty", "/api/removeFromCart", "/api/deleteCart"})
 public class ApiController extends HttpServlet {
-    private final Map<Product, Integer> cart = new HashMap<>();
+    private Map<Product, Integer> cart = new HashMap<>();
     private final ProductDao productDataStore = ProductDaoMem.getInstance();
 
     @Override
@@ -43,18 +43,14 @@ public class ApiController extends HttpServlet {
                 out.println(json);
                 break;
 
-            case "/api/removeFromCart":
-//                TODO complete
+            case "/api/cartQty":
+                if (session.getAttribute("cart") != null) {
+                    cart = (Map<Product, Integer>) session.getAttribute("cart");
+                }
+                int cartQuantity = cart.values().stream().reduce(0, Integer::sum);
+                String var = new Gson().toJson(cartQuantity);
+                out.println(var);
                 break;
-
-            case "/api/deleteCart":
-//                TODO complete case
-                break;
-
-            case "/api/editCart":
-//                TODO case
-                break;
-
         }
         out.flush();
     }
