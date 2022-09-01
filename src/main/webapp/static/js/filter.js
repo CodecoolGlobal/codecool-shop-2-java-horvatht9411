@@ -8,8 +8,15 @@ document.querySelector("#category").addEventListener("change", async evt => {
 });
 
 
-document.querySelector("#supplier").addEventListener("change", evt => {
-    console.log(evt.target.value);
+async function changeItemSupplier(supplier) {
+    const url = `/api/supplier?supplier=${supplier}`;
+    return await apiGet(url);
+}
+
+document.querySelector("#supplier").addEventListener("change", async evt => {
+    let selectedCategoryId = evt.target.selectedIndex;
+    let category = await changeItemSupplier(selectedCategoryId);
+    cardBuilder(category);
 })
 
 async function changeItemCategory(category) {
