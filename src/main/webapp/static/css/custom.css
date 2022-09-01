@@ -169,31 +169,44 @@ nav {
     align-content: center;
 }
 
-.description::-webkit-scrollbar{
+.description::-webkit-scrollbar {
     width: 5px;
 }
-.description::-webkit-scrollbar-track{
+
+.description::-webkit-scrollbar-track {
     background: #dce9ef;
 }
-.description::-webkit-scrollbar-thumb{
+
+.description::-webkit-scrollbar-thumb {
     background: #428bca;
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
     width: 10px;
 }
-::-webkit-scrollbar-track{
+
+::-webkit-scrollbar-track {
     background: lightblue;
 }
-::-webkit-scrollbar-thumb{
+
+::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background: #428bca;
 }
 
 .add-to-cart {
+    border-color: navy !important;
+    outline: navy !important;
     background-color: #428bca;
 }
 
+.add-to-cart:hover {
+    background: lightblue !important;
+    border-color: navy !important;
+    outline: none !important;
+}
+
 .card-text {
-    padding: 0 15px 0 15px;
     text-align: center;
 }
+
