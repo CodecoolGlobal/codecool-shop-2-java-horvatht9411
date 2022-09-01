@@ -37,7 +37,7 @@
             <li class="filter-menu"><a href="/">Minden Márka</a>
                 <ul class="filter-submenu">
                 <li  th:each="supplier : ${supplier}" th:value="${supplier.id}">
-                    <p class="filter-supplier" th:text="${supplier.name}" th:attr="data-api=${supplier.id}"/>
+                    <a class="filter-supplier" th:text="${supplier.name}" th:attr="data-api=${supplier.id}"/>
                 </li>
                 </ul>
         </ul>
