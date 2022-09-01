@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,9 +39,9 @@ public class EditCartController extends HttpServlet {
         session.setAttribute("cart", cart);
 
         assert updatedProduct != null;
-        BigDecimal itemTotal = calculateItemTotal(updatedProduct);
-        BigDecimal bigTotal = calculateBigTotal();
-        BigDecimal[] totals = {itemTotal, bigTotal};
+        int itemTotal = calculateItemTotal(updatedProduct);
+        int bigTotal = calculateBigTotal();
+        int[] totals = {itemTotal, bigTotal};
         String json = new Gson().toJson(totals);
         out.println(json);
         out.flush();
@@ -61,7 +60,8 @@ public class EditCartController extends HttpServlet {
                 .filter(item -> item.getId() == productId).findFirst().orElse(null);
         cart.remove(deletedProduct);
         session.setAttribute("cart", cart);
-        String data = new Gson().toJson(cart);
+        int bigTotal = calculateBigTotal();
+        String data = new Gson().toJson(bigTotal);
         out.println(data);
         out.flush();
     }
@@ -71,15 +71,15 @@ public class EditCartController extends HttpServlet {
         return scanner.hasNext() ? scanner.useDelimiter("\\A").next() : "";
     }
 
-    private BigDecimal calculateItemTotal(Product product) {
-        return product.getDefaultPrice().multiply(BigDecimal.valueOf(cart.get(product)));
+    private int calculateItemTotal(Product product) {
+        return product.getDefaultPrice() * cart.get(product);
     }
 
-    private BigDecimal calculateBigTotal() {
-        BigDecimal bigTotal = BigDecimal.ZERO;
+    private int calculateBigTotal() {
+        int bigTotal = 0;
         for (Product product : cart.keySet()) {
-            BigDecimal itemTotal = calculateItemTotal(product);
-            bigTotal = bigTotal.add(itemTotal);
+            int itemTotal = calculateItemTotal(product);
+            bigTotal += itemTotal;
         }
         return bigTotal;
     }
