@@ -38,13 +38,31 @@
 <div th:replace="header.html :: copy"></div>
 
 <div class="container">
+
+<!--    <div id="select-category">-->
+<!--        <label for="category">Kategória</label>-->
+<!--        <select name="category" id="category">-->
+<!--            <option value="all">Minden kategória</option>-->
+<!--            <option th:each="cat : ${category}" th:value="${cat.id}" th:attr="data-api=${cat.department}"-->
+<!--                    th:text="${cat.name}"/>-->
+<!--        </select>-->
+<!--    </div>-->
+
+<!--    <div id="select-supplier">-->
+<!--        <label for="supplier">Beszállító</label>-->
+<!--        <select name="supplier" id="supplier">-->
+<!--            <option value="all">Minden besz�ll�t�</option>-->
+<!--            <option th:each="supplier : ${supplier}" th:value="${supplier.id}" th:text="${supplier.name}"/>-->
+<!--        </select>-->
+<!--    </div>-->
+
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
-                <img class="" th:src="${prod.imageUrl} ?: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'"/>
+                <img class="prod-image" th:src="${prod.imgURL} ?: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'"/>
                 <div class="card-header">
                     <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
+                    <p class="card-text description" th:text="${prod.description}">Product description... </p>
                 </div>
                 <div class="card-body">
                     <div class="card-text">
