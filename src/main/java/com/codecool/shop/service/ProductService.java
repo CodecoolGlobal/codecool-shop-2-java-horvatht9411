@@ -42,4 +42,10 @@ public class ProductService {
     public Set<Supplier> getAllSupplier() {
         return supplierDao.getAll();
     }
+
+    public List<Product> getProductsForSupplier(int supplierId) {
+        var supplier = supplierDao.find(supplierId);
+        return productDao.getBy(supplier);
+    }
+
 }

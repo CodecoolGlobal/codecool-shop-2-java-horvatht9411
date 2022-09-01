@@ -13,31 +13,31 @@
             <button class="button-search" type="submit"><i class='fa-solid fa-magnifying-glass'></i></button>
         </form>
         <div class="navbar-toolbox">
-        <a href="/" class="nav-link">test</a>
-        <a href="/" class="nav-link">test</a>
+        <a href="/" class="nav-link">Regisztráció</a>
+        <a href="/" class="nav-link">Bejelentkezés</a>
         <a href="/cart" class="nav-link">
             <i class="fa-solid fa-cart-shopping"></i>
             <i class="cart-qty"></i>
-            cart
+            Kosár
         </a>
         </div>
     </nav>
     <nav class="navbar-filter">
         <ul>
-            <li class="filter-menu"><a href="/">All Category</a>
+            <li class="filter-menu"><a href="/">Minden Kategória</a>
             <ul class="filter-submenu">
-                <li th:each="cat : ${category}">
-                <a th:text="${cat.name}" th:href="@{/category(id=${cat.id})}"/>
+                <li th:each="cat : ${category}" >
+                    <a class="filter-category"  th:text="${cat.name}" th:attr="data-api=${cat.id}" />
                 </li>
             </ul>
             </li>
         </ul>
 
         <ul>
-            <li class="filter-menu"><a href="/">All Supplier</a>
+            <li class="filter-menu"><a href="/">Minden Márka</a>
                 <ul class="filter-submenu">
-                <li th:each="supplier : ${supplier}">
-                    <a th:text="${supplier.name}" th:href="@{/supplier(id=${supplier.id})}"/>
+                <li  th:each="supplier : ${supplier}" th:value="${supplier.id}">
+                    <p class="filter-supplier" th:text="${supplier.name}" th:attr="data-api=${supplier.id}"/>
                 </li>
                 </ul>
         </ul>
