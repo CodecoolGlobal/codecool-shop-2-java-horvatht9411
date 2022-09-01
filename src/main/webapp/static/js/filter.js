@@ -66,7 +66,7 @@ function cardBuilder(category) {
         cardTextParagraph.innerText = cat["defaultPrice"] + " " + cat["defaultCurrency"];
         cardText.append(cardTextParagraph);
 
-        let button = createElement("a");
+        let button = createElement("button");
         button.dataset.prodId = cat["id"];
         button.classList.add("btn");
         button.classList.add("btn-success");
@@ -92,6 +92,7 @@ function cardBuilder(category) {
         cardItem.append(card);
         content.append(cardItem);
     }
+    addToCart();
 }
 
 async function apiGet(url) {
