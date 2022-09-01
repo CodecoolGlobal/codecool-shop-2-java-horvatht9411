@@ -138,7 +138,12 @@ nav {
 
 .card {
     margin: 0.5em;
+    width: 80%;
+    height: 610px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 
 .card-header {
     background-color: #dce9ef;
@@ -147,6 +152,71 @@ nav {
 #footer {
     text-align: center;
     align-content: center;
+}
+
+.description {
+    width: 100%;
+    height: 100px;
+    overflow: auto;
+}
+
+.prod-image {
+    width: 100%;
+    max-height: 300px;
+}
+
+.filter-category:hover {
+    color: midnightblue;
+}
+
+#footer {
+
+.description::-webkit-scrollbar {
+    width: 5px;
+}
+
+.description::-webkit-scrollbar-track {
+    background: #dce9ef;
+}
+
+.description::-webkit-scrollbar-thumb {
+    background: #428bca;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: lightblue;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #428bca;
+}
+
+.add-to-cart {
+    border-color: navy !important;
+    outline: navy !important;
+    background-color: #428bca;
+}
+
+.add-to-cart:hover {
+    background: lightblue !important;
+    border-color: navy !important;
+    outline: none !important;
+}
+
+.card-text {
+    text-align: center;
+}
+
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: white;
 }
 
 .cart-container {
