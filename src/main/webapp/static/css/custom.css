@@ -170,6 +170,9 @@ nav {
 }
 
 #footer {
+    text-align: center;
+    align-content: center;
+}
 
 .description::-webkit-scrollbar {
     width: 5px;
@@ -243,4 +246,17 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 th {
     background-color: #4cb7d9;
     color: white;
+}
+
+.quantity{
+    background: transparent;
+    border: none;
+    width: 30%;
+}
+
+th{
+    text-align: center;
+}
+td{
+    text-align: center;
 }

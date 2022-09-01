@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <META HTTP-EQUIV="Content-Type" Content="text/html; Charset=iso-8859-2">
-    <META HTTP-EQUIV="Content-Language" Content="hu">
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">-->
+    <meta charset="utf-8"/>
     <script src="/static/js/display_cart.js" defer></script>
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>Kosár</title>
+    <title>KosĂĄr</title>
 
     <script src="/static/js/filter.js" defer></script>
     <!-- Bootstrap components -->
@@ -36,33 +36,6 @@
         <meta charset="utf-8"/>
         <meta name="author" content="Codecool"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
-        <title>Codecool Shop</title>
-
-        <script src="/static/js/filter.js" defer></script>
-        <script src="/static/js/cart.js" defer></script>
-        <!-- Bootstrap components -->
-        <!-- Latest compiled and minified Jquery -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
-        <!--Latest compiled and minified Popper -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                crossorigin="anonymous"></script>
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-                integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-                crossorigin="anonymous"></script>
-
-        <!-- Latest compiled and minified CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <!-- End of Bootstrap components -->
-
-        <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
-        <script src="https://kit.fontawesome.com/b0236555a9.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div th:replace="header.html :: copy"></div>
@@ -71,45 +44,39 @@
     <a class="btn btn-success" href="/checkout">RegisztrĂĄciĂł</a>
     <a class="btn btn-success" href="/payment">PĂŠnztĂĄr</a>
     <a class="btn btn-success" href="/">Vissza</a><br><br>
-<div th:replace="header.html :: copy"></div>
-<div>
-    <h4>Rendelés</h4>
-    <a class="btn btn-success" href="/checkout">Regisztráció</a>
-    <a class="btn btn-success" href="/payment">Pénztár</a>
-    <a class="btn btn-success" href="/">Vissza</a>
     <table>
         <thead>
         <tr>
-            <th>Termékkód</th>
-            <th>Név</th>
-            <th>Egységár</th>
-            <th></th>
+            <th>TermĂŠkkĂłd</th>
+            <th>NĂŠv</th>
+            <th>EgysĂŠgĂĄr</th>
             <th>Darab</th>
-            <th>Összeg</th>
+            <th>Ăsszeg</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="item: ${cart.keySet()}">
             <td th:text="${item.id}"></td>
             <td th:text="${item.name}"></td>
-            <td th:text="${item.defaultPrice}"></td>
-            <td class="item-currency" th:text="${item.defaultCurrency}"></td>
+            <td th:text="${item.defaultPrice} +' '+ ${item.defaultCurrency}" ></td>
+<!--            <td class="item-currency" th:text="${item.defaultCurrency}"></td>-->
             <td>
                 <div>
                     <input class="quantity" th:data-prod-id="${item.id}" type="text" th:value="${cart.get(item)}">
                 </div>
             </td>
-            <td class="price-sum" th:text="${item.defaultPrice * cart.get(item)}"></td>
+            <td class="price-sum" th:text="${item.defaultPrice * cart.get(item)} +' '+ ${item.defaultCurrency}"></td>
             <td>
                 <button th:data-item-id="${item.id}" class="btn btn-success delete-item">
-                    Töröl
+                    TĂśrĂśl
                 </button>
             </td>
         </tr>
         </tbody>
     </table>
     <br>
-    <p>Végösszeg:<span id="total-price"></span><span id="currency"></span></p>
+    <strong>VĂŠgĂśsszeg: <span id="total-price"></span><span id="currency"> HUF</span></strong>
     <br><br><br><br><br><br>
 </div>
 <div th:replace="footer.html :: copy"></div>

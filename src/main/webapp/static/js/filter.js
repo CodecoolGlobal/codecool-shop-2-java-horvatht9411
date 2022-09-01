@@ -72,7 +72,7 @@ function cardBuilder(category) {
         button.classList.add("btn");
         button.classList.add("btn-success");
         button.classList.add("add-to-cart");
-        button.innerText = "Add to cart";
+        button.innerText = "Kosárba";
 
         let cardText2 = createDiv("card-text");
         cardText2.append(button);

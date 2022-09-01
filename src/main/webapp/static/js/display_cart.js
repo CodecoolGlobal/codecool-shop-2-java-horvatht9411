@@ -46,7 +46,7 @@ async function editCart() {
             let totals = await editQuantity(productId, quantity);
             let itemTotal = e.target.closest("tr").children[5];
             itemTotal.textContent = totals[0];
-            totalPrice.textContent = totals[1];
+            totalPrice.textContent = totals[1] + "HUF";
         });
     }
 }

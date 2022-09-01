@@ -22,6 +22,7 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        response.setCharacterEncoding("UTF-8");
 
         if (session.getAttribute("cart") != null) {
             cart = (Map<Product, Integer>) session.getAttribute("cart");
