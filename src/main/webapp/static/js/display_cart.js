@@ -21,12 +21,12 @@ async function apiPost(url, payload) {
     }
 }
 
-async function apiGet(url) {
-    const response = await fetch(url);
+async function apiDelete(url) {
+    let response = await fetch(url, {
+        method: "DELETE",
+    });
     if (response.ok) {
-        return response.json();
-    } else {
-        console.log(response.statusText);
+        return await response.json();
     }
 }
 
@@ -35,7 +35,7 @@ async function editQuantity(id, data) {
 }
 
 async function deleteItem(id) {
-    return await apiGet(`/api/removeFromCart?id=${id}`);
+    return await apiDelete(`/api/removeFromCart/${id}`);
 }
 
 async function editCart() {
@@ -43,25 +43,12 @@ async function editCart() {
         input.addEventListener('change', async (e) => {
             let productId = e.currentTarget.dataset.prodId;
             let quantity = parseInt(e.currentTarget.value);
-            let unitPrice = e.currentTarget.closest("tr").children[2].textContent;
-            let totalByItem = parseFloat(unitPrice) * quantity;
-            let itemTotal = e.currentTarget.closest("tr").children[5];
-            itemTotal.textContent = totalByItem.toString();
-            totalPrice.textContent = updateTotalPrice().toString();
-            await editQuantity(productId, quantity);
+            let totals = await editQuantity(productId, quantity);
+            let itemTotal = e.target.closest("tr").children[5];
+            itemTotal.textContent = totals[0];
+            totalPrice.textContent = totals[1];
         });
     }
-}
-
-function updateTotalPrice() {
-    const updatedPriceSum = document.querySelectorAll(".price-sum");
-    let total = 0;
-    for (let price of updatedPriceSum) {
-        total += parseFloat(price.textContent);
-    }
-    totalPrice.textContent = total.toString();
-    currency.textContent = ` ${itemCurrency.textContent}`;
-    return total;
 }
 
 async function deleteItemFromCart() {
@@ -70,7 +57,7 @@ async function deleteItemFromCart() {
             let productId = e.currentTarget.dataset.itemId;
             let itemRow = e.currentTarget.closest("tr");
             tableBody.removeChild(itemRow);
-            await deleteItem(productId);
+            totalPrice.textContent = await deleteItem(productId);
         });
     }
 }
@@ -78,7 +65,7 @@ async function deleteItemFromCart() {
 function totalPrices() {
     let total = 0;
     for (let price of priceSum) {
-        total += parseFloat(price.textContent);
+        total += parseInt(price.textContent);
     }
     totalPrice.textContent = total.toString();
     currency.textContent = ` ${itemCurrency.textContent}`;
