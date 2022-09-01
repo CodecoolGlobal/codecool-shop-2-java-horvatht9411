@@ -48,7 +48,7 @@
     </div>
 
     <div id="select-supplier">
-        <label for="supplier">Besz�ll�t�</label>
+        <label for="supplier">Beszállító</label>
         <select name="supplier" id="supplier">
             <option value="all">Minden besz�ll�t�</option>
             <option th:each="supplier : ${supplier}" th:value="${supplier.id}" th:text="${supplier.name}"/>
