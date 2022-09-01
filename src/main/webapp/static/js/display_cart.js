@@ -57,7 +57,7 @@ async function deleteItemFromCart() {
             let productId = e.currentTarget.dataset.itemId;
             let itemRow = e.currentTarget.closest("tr");
             tableBody.removeChild(itemRow);
-            await deleteItem(productId);
+            totalPrice.textContent = await deleteItem(productId);
         });
     }
 }
@@ -65,7 +65,7 @@ async function deleteItemFromCart() {
 function totalPrices() {
     let total = 0;
     for (let price of priceSum) {
-        total += parseFloat(price.textContent).toFixed(2);
+        total += parseInt(price.textContent);
     }
     totalPrice.textContent = total.toString();
     currency.textContent = ` ${itemCurrency.textContent}`;
