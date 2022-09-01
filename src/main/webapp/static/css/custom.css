@@ -133,3 +133,8 @@ nav {
 .card {
     margin: 0.5em;
 }
+
+.filter-category:hover {
+    color: midnightblue;
+}
+

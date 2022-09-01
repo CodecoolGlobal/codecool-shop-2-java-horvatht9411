@@ -1,4 +1,27 @@
 const content = document.querySelector(".container");
+const categoryMenu = document.querySelectorAll(".filter-category");
+const supplierMenu = document.querySelectorAll(".filter-supplier");
+
+
+
+categoryMenu.forEach(async function (category){
+    category.addEventListener("click", async evt => {
+        let selectedCategoryId = category.dataset.api;
+        let selectedCategory = await changeItemCategory(selectedCategoryId);
+        cardBuilder(selectedCategory);
+    });
+});
+
+
+supplierMenu.forEach(async function (supplier){
+    supplier.addEventListener("click", async evt => {
+        let selectedSupplierId = supplier.dataset.api;
+        let selectedSupplier = await changeItemSupplier(selectedSupplierId);
+        cardBuilder(selectedSupplier);
+    });
+});
+
+
 
 document.querySelector("#category").addEventListener("change", async evt => {
     let selectedCategoryId = evt.target.selectedIndex;
