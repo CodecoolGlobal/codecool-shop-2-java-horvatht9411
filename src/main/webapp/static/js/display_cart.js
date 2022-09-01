@@ -1,6 +1,4 @@
 const totalPrice = document.querySelector("#total-price");
-const currency = document.querySelector("#currency");
-const itemCurrency = document.querySelector(".item-currency");
 const priceSum = document.querySelectorAll(".price-sum");
 const itemQuantity = document.querySelectorAll(".quantity");
 const deleteButton = document.querySelectorAll(".delete-item");
@@ -44,9 +42,9 @@ async function editCart() {
             let productId = e.currentTarget.dataset.prodId;
             let quantity = parseInt(e.currentTarget.value);
             let totals = await editQuantity(productId, quantity);
-            let itemTotal = e.target.closest("tr").children[5];
-            itemTotal.textContent = totals[0];
-            totalPrice.textContent = totals[1] + "HUF";
+            let itemTotal = e.target.closest("tr").children[4];
+            itemTotal.textContent = totals[0] + " HUF";
+            totalPrice.textContent = totals[1];
         });
     }
 }
@@ -68,7 +66,6 @@ function totalPrices() {
         total += parseInt(price.textContent);
     }
     totalPrice.textContent = total.toString();
-    currency.textContent = ` ${itemCurrency.textContent}`;
 }
 
 window.onload = async () => {
