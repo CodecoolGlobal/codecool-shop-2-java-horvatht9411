@@ -76,3 +76,5 @@ window.onload = async () => {
     await editCart();
     await deleteItemFromCart();
 }
+
+
