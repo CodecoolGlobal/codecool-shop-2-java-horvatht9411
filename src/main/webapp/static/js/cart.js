@@ -1,5 +1,6 @@
 const cartQty = document.querySelector(".cart-qty");
 
+
 async function apiGet(url) {
     const response = await fetch(url);
     if (response.ok) {
@@ -42,6 +43,7 @@ function sendProductToCart(id, productId) {
 
 async function updateCartQty() {
     cartQty.textContent = await getCartQuantity();
+    quantity = await getCartQuantity();
 }
 
 function getCartQuantity() {
