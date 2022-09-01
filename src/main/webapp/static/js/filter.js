@@ -56,6 +56,7 @@ function cardBuilder(category) {
         title.innerText = cat["name"];
         let headerText = createElement("p");
         headerText.classList.add("card-text");
+        headerText.classList.add("description");
         headerText.innerText = cat["description"];
         header.append(title);
         header.append(headerText);
@@ -83,6 +84,7 @@ function cardBuilder(category) {
 
         let image = createElement("img");
         image.src = cat["imgURL"];
+        image.classList.add("prod-image");
 
 
         card.append(image);
