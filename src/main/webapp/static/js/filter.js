@@ -44,11 +44,12 @@ function cardBuilder(category) {
         header.append(title);
         let headerText = createElement("p");
         headerText.classList.add("card-text");
+        headerText.innerText = cat["description"];
         header.append(headerText);
         let cardText = createDiv("card-text");
         let cardTextParagraph = createElement("p");
         cardTextParagraph.classList.add("lead");
-        cardTextParagraph.innerText = cat["defaultPrice"] + cat["defaultCurrency"];
+        cardTextParagraph.innerText = cat["defaultPrice"] + " " + cat["defaultCurrency"];
         cardText.append(cardTextParagraph);
         let cardText2 = createDiv("card-text");
         let button = createElement("a");
