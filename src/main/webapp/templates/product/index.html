@@ -41,8 +41,7 @@
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff"
-                     th:attr="src='https://cdn.shopify.com/s/files/1/0022/0587/6335/products/ComboRod_Reelcopy_2000x.png?v=1657665133'" alt=""/>
+                <img class="" th:src="${prod.imageUrl} ?: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'"/>
                 <div class="card-header">
                     <h4 class="card-title" th:text="${prod.name}">Product name</h4>
                     <p class="card-text" th:text="${prod.description}">Product description... </p>
