@@ -1,4 +1,27 @@
 const content = document.querySelector(".container");
+const categoryMenu = document.querySelectorAll(".filter-category");
+const supplierMenu = document.querySelectorAll(".filter-supplier");
+
+
+
+categoryMenu.forEach(async function (category){
+    category.addEventListener("click", async evt => {
+        let selectedCategoryId = category.dataset.api;
+        let selectedCategory = await changeItemCategory(selectedCategoryId);
+        cardBuilder(selectedCategory);
+    });
+});
+
+
+supplierMenu.forEach(async function (supplier){
+    supplier.addEventListener("click", async evt => {
+        let selectedSupplierId = supplier.dataset.api;
+        let selectedSupplier = await changeItemSupplier(selectedSupplierId);
+        cardBuilder(selectedSupplier);
+    });
+});
+
+
 
 document.querySelector("#category").addEventListener("change", async evt => {
     let selectedCategoryId = evt.target.selectedIndex;
@@ -8,8 +31,15 @@ document.querySelector("#category").addEventListener("change", async evt => {
 });
 
 
-document.querySelector("#supplier").addEventListener("change", evt => {
-    console.log(evt.target.value);
+async function changeItemSupplier(supplier) {
+    const url = `/api/supplier?supplier=${supplier}`;
+    return await apiGet(url);
+}
+
+document.querySelector("#supplier").addEventListener("change", async evt => {
+    let selectedCategoryId = evt.target.selectedIndex;
+    let category = await changeItemSupplier(selectedCategoryId);
+    cardBuilder(category);
 })
 
 async function changeItemCategory(category) {
