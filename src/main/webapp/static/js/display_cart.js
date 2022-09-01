@@ -3,6 +3,7 @@ const priceSum = document.querySelectorAll(".price-sum");
 const itemQuantity = document.querySelectorAll(".quantity");
 const deleteButton = document.querySelectorAll(".delete-item");
 const tableBody = document.querySelector("tbody");
+document.querySelector(".cart-qty").parentElement.textContent = '';
 
 async function apiPost(url, payload) {
     let response = await fetch(url, {
