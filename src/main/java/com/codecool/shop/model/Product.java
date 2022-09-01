@@ -11,12 +11,12 @@ public class Product extends BaseModel {
     private Supplier supplier;
     private String imgURL;
 
-    public Product(String name, int defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier, String imgURL) {
+    public Product(String name, int defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier, String imageUrl) {
         super(name, description);
-        this.imgURL = imgURL;
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
+        this.setImageUrl(imageUrl);
     }
 
     public int getDefaultPrice() {
@@ -81,5 +81,13 @@ public class Product extends BaseModel {
                 this.defaultCurrency.toString(),
                 this.productCategory.getName(),
                 this.supplier.getName());
+    }
+
+    public String getImageUrl() {
+        return imgURL;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imgURL = imageUrl;
     }
 }

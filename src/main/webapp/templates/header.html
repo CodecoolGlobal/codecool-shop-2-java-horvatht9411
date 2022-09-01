@@ -6,17 +6,41 @@
 </head>
 <body>
 <div th:fragment="copy">
-    <nav class="navbar">
+    <nav class="navbar-header">
         <a href="/" class="navbar-brand"><img src="/static/img/logo2.png" alt=""></a>
         <form action="/">
-        <input class="navbar-searchbar" type="text" id="search-input">
+            <input class="navbar-searchbar" type="text" id="search-input">
             <button class="button-search" type="submit"><i class='fa-solid fa-magnifying-glass'></i></button>
         </form>
         <div class="navbar-toolbox">
         <a href="/" class="nav-link">test</a>
         <a href="/" class="nav-link">test</a>
-        <a href="/" class="nav-link"><i class="fa-solid fa-cart-shopping"></i> cart</a>
+        <a href="/cart" class="nav-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <i class="cart-qty"></i>
+            cart
+        </a>
         </div>
+    </nav>
+    <nav class="navbar-filter">
+        <ul>
+            <li class="filter-menu"><a href="/">All Category</a>
+            <ul class="filter-submenu">
+                <li th:each="cat : ${category}">
+                <a th:text="${cat.name}" th:href="@{/category(id=${cat.id})}"/>
+                </li>
+            </ul>
+            </li>
+        </ul>
+
+        <ul>
+            <li class="filter-menu"><a href="/">All Supplier</a>
+                <ul class="filter-submenu">
+                <li th:each="supplier : ${supplier}">
+                    <a th:text="${supplier.name}" th:href="@{/supplier(id=${supplier.id})}"/>
+                </li>
+                </ul>
+        </ul>
     </nav>
 </div>
 </body>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <META HTTP-EQUIV="Content-Type" Content="text/html; Charset=iso-8859-2">
+    <META HTTP-EQUIV="Content-Language" Content="hu">
+    <title>Cart</title>
+    <script src="/static/js/display_cart.js" defer></script>
+    <
+</head>
+<body>
+<div>
+    <h4>Rendelés</h4>
+    <a class="btn btn-success" href="/checkout">Regisztráció</a>
+    <a class="btn btn-success" href="/payment">Pénztár</a>
+    <a class="btn btn-success" href="/">Vissza</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Termékkód</th>
+            <th>Név</th>
+            <th>Egységár</th>
+            <th></th>
+            <th>Darab</th>
+            <th>Összeg</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${cart.keySet()}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.defaultPrice}"></td>
+            <td class="item-currency" th:text="${item.defaultCurrency}"></td>
+            <td>
+                <div>
+                    <input class="quantity" th:data-prod-id="${item.id}" type="text" th:value="${cart.get(item)}">
+                </div>
+            </td>
+            <td class="price-sum" th:text="${item.defaultPrice * cart.get(item)}"></td>
+            <td>
+                <button th:data-item-id="${item.id}" class="btn btn-success delete-item">
+                    Töröl
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p>Végösszeg:<span id="total-price"></span><span id="currency"></span></p>
+
+</div>
+</body>
+</html>

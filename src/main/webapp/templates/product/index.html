@@ -9,6 +9,7 @@
     <title>Codecool Shop</title>
 
     <script src="/static/js/filter.js" defer></script>
+    <script src="/static/js/cart.js" defer></script>
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -36,29 +37,31 @@
 <body>
 <div th:replace="header.html :: copy"></div>
 
+
+<!--<div id="select-category">-->
+<!--    <label for="category">Kateg�ria</label>-->
+<!--    <select name="category" id="category">-->
+<!--        <option value="all">Minden kateg�ria</option>-->
+<!--        <option th:each="cat : ${category}" th:value="${cat.id}" th:text="${cat.name}"/>-->
+<!--    </select>-->
+<!--</div>-->
+
+<!--<div id="select-supplier">-->
+<!--    <label for="supplier">Besz�ll�t�</label>-->
+<!--    <select name="supplier" id="supplier">-->
+<!--        <option value="all">Minden besz�ll�t�</option>-->
+<!--        <option th:each="supplier : ${supplier}" th:value="${supplier.id}" th:text="${supplier.name}"/>-->
+<!--    </select>-->
+<!--</div>-->
+
+
+
+
 <div class="container">
-
-    <div id="select-category">
-        <label for="category">Kateg�ria</label>
-        <select name="category" id="category">
-            <option value="all">Minden kateg�ria</option>
-            <option th:each="cat : ${category}" th:value="${cat.id}" th:text="${cat.name}"/>
-        </select>
-    </div>
-
-    <div id="select-supplier">
-        <label for="supplier">Besz�ll�t�</label>
-        <select name="supplier" id="supplier">
-            <option value="all">Minden besz�ll�t�</option>
-            <option th:each="supplier : ${supplier}" th:value="${supplier.id}" th:text="${supplier.name}"/>
-        </select>
-    </div>
-
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff"
-                     th:attr="src= ${prod.imgURL}" alt="${prod.name}"/>
+                <img class="" th:src="${prod.imageUrl} ?: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'"/>
                 <div class="card-header">
                     <h4 class="card-title" th:text="${prod.name}">Product name</h4>
                     <p class="card-text" th:text="${prod.description}">Product description... </p>
@@ -68,7 +71,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <button th:data-prod-id="${prod.id}" class="btn btn-success add-to-cart">Add to cart</button>
                     </div>
                 </div>
             </div>
