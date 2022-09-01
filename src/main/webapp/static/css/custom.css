@@ -58,11 +58,16 @@
     margin: 0 0 11px;
 }
 
-a:hover{
+a:hover {
     text-decoration: none;
 }
 
-ul{
+.filter-submenu li:hover {
+    cursor: pointer;
+    background-color: lightblue;
+}
+
+ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -78,15 +83,16 @@ nav {
     padding: 1em 2em;
 }
 
-.filter-menu{
+.filter-menu {
     position: relative;
     padding: 0 1em;
 }
-.filter-submenu li{
+
+.filter-submenu li {
     white-space: nowrap;
 }
 
-.filter-submenu{
+.filter-submenu {
     position: absolute;
     z-index: -1;
     background-color: white;
@@ -98,7 +104,7 @@ nav {
     box-shadow: 3px 3px 5px lightblue, -1px 0px 5px lightblue;
 }
 
-.filter-menu:hover .filter-submenu{
+.filter-menu:hover .filter-submenu {
     visibility: visible;
     transform: scaleY(100%);
     transition: all 0.5s;
@@ -132,4 +138,13 @@ nav {
 
 .card {
     margin: 0.5em;
+}
+
+.card-header {
+    background-color: #dce9ef;
+}
+
+#footer{
+    text-align: center;
+    align-content: center;
 }
