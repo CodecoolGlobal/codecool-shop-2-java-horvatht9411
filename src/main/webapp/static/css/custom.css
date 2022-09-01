@@ -1,82 +1,135 @@
 .glyphicon {
-    margin-right:5px;
+    margin-right: 5px;
 }
-.thumbnail
-{
+
+.thumbnail {
     margin-bottom: 20px;
     padding: 0px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
 }
-.thumbnail img
-{
+
+.thumbnail img {
     margin-top: 10px;
 }
-.item.list-group-item
-{
+
+.item.list-group-item {
     float: none;
     width: 100%;
     background-color: #fff;
     margin-bottom: 10px;
 }
-.item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
-{
+
+.item.list-group-item:nth-of-type(odd):hover, .item.list-group-item:hover {
     background: #428bca;
 }
 
-.item.list-group-item .list-group-image
-{
+.item.list-group-item .list-group-image {
     margin-right: 10px;
 }
-.item.list-group-item .thumbnail
-{
+
+.item.list-group-item .thumbnail {
     margin-bottom: 0px;
 }
-.item.list-group-item .caption
-{
+
+.item.list-group-item .caption {
     padding: 9px 9px 0px 9px;
 }
-.item.list-group-item:nth-of-type(odd)
-{
+
+.item.list-group-item:nth-of-type(odd) {
     background: #eeeeee;
 }
 
-.item.list-group-item:before, .item.list-group-item:after
-{
+.item.list-group-item:before, .item.list-group-item:after {
     display: table;
     content: " ";
 }
 
-.item.list-group-item img
-{
+.item.list-group-item img {
     float: left;
 }
-.item.list-group-item:after
-{
+
+.item.list-group-item:after {
     clear: both;
 }
-.list-group-item-text
-{
+
+.list-group-item-text {
     margin: 0 0 11px;
 }
 
-.navbar{
+a:hover{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
 }
-.navbar-searchbar{
+
+.navbar-filter {
+    padding: 1em 2em;
+}
+
+.filter-menu{
+    position: relative;
+    padding: 0 1em;
+}
+.filter-submenu li{
+    white-space: nowrap;
+}
+
+.filter-submenu{
+    position: absolute;
+    z-index: -1;
+    background-color: white;
+    visibility: hidden;
+    padding: 0 1em;
+    opacity: 0;
+    transform-origin: top;
+    transform: scaleY(0%);
+    box-shadow: 3px 3px 5px lightblue, -1px 0px 5px lightblue;
+}
+
+.filter-menu:hover .filter-submenu{
+    visibility: visible;
+    transform: scaleY(100%);
+    transition: all 0.5s;
+    opacity: 1;
+    z-index: 10;
+}
+
+.navbar-header {
+    justify-content: space-between;
+}
+
+.navbar-searchbar {
     border-radius: 1em;
     border: solid 1px;
     padding: 0 1em;
 }
-.button-search{
+
+.button-search {
     all: unset;
     transform: translateX(-200%);
-}.button-search:focus{
-    all: unset;
 }
-.navbar-toolbox{
+
+.button-search:focus {
+    outline: none;
+}
+
+.navbar-toolbox {
     display: flex;
     flex-wrap: wrap;
+}
+
+.card {
+    margin: 0.5em;
 }

@@ -36,12 +36,8 @@ function createDiv(string) {
 }
 
 function cardBuilder(category) {
-    console.log(category);
     content.innerHTML = "";
     for (const cat of category) {
-        console.log(cat);
-        console.log(cat["id"]);
-        console.log(cat[0]);
         let cardItem = createDiv("col");
         let card = createDiv("card");
         let header = createDiv("card-header");
@@ -86,7 +82,6 @@ function cardBuilder(category) {
 async function apiGet(url) {
     let response = await fetch(url);
     if (response.ok) {
-        console.log(response)
         return response.json();
     }
 }
