@@ -8,8 +8,9 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
 import java.util.List;
+import java.util.Set;
 
-public class ProductService{
+public class ProductService {
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
     private SupplierDao supplierDao;
@@ -20,11 +21,11 @@ public class ProductService{
         this.supplierDao = supplierDao;
     }
 
-    public ProductCategory getProductCategory(int categoryId){
+    public ProductCategory getProductCategory(int categoryId) {
         return productCategoryDao.find(categoryId);
     }
 
-    public List<Product> getProductsForCategory(int categoryId){
+    public List<Product> getProductsForCategory(int categoryId) {
         var category = productCategoryDao.find(categoryId);
         return productDao.getBy(category);
     }
@@ -38,7 +39,7 @@ public class ProductService{
         return productDao.getAll();
     }
 
-    public List<Supplier> getAllSupplier() {
+    public Set<Supplier> getAllSupplier() {
         return supplierDao.getAll();
     }
 }
