@@ -211,6 +211,18 @@ nav {
     outline: none !important;
 }
 
+.delete-item{
+    border-color: navy !important;
+    outline: navy !important;
+    background-color: #428bca;
+}
+
+.delete-item:hover {
+    background: lightblue !important;
+    border-color: navy !important;
+    outline: none !important;
+}
+
 .card-text {
     text-align: center;
 }
