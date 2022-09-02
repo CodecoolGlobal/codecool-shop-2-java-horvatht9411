@@ -211,13 +211,13 @@ nav {
     outline: none !important;
 }
 
-.delete-item{
+.btn-success{
     border-color: navy !important;
     outline: navy !important;
     background-color: #428bca;
 }
 
-.delete-item:hover {
+.btn-success:hover {
     background: lightblue !important;
     border-color: navy !important;
     outline: none !important;
