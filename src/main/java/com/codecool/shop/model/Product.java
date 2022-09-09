@@ -35,7 +35,7 @@ public class Product extends BaseModel {
     }
 
     public String getPrice() {
-        return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
+        return this.defaultPrice + " " + this.defaultCurrency.toString();
     }
 
     public void setPrice(int price, String currency) {
@@ -59,7 +59,6 @@ public class Product extends BaseModel {
     public String getImgURL() {
         return imgURL;
     }
-
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;

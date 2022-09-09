@@ -4,10 +4,10 @@
 
 .thumbnail {
     margin-bottom: 20px;
-    padding: 0px;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
+    padding: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 .thumbnail img {
@@ -30,11 +30,11 @@
 }
 
 .item.list-group-item .thumbnail {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .item.list-group-item .caption {
-    padding: 9px 9px 0px 9px;
+    padding: 9px 9px 0 9px;
 }
 
 .item.list-group-item:nth-of-type(odd) {
@@ -101,7 +101,7 @@ nav {
     opacity: 0;
     transform-origin: top;
     transform: scaleY(0%);
-    box-shadow: 3px 3px 5px lightblue, -1px 0px 5px lightblue;
+    box-shadow: 3px 3px 5px lightblue, -1px 0 5px lightblue;
 }
 
 .filter-menu:hover .filter-submenu {
@@ -211,7 +211,7 @@ nav {
     outline: none !important;
 }
 
-.btn-success{
+.btn-success {
     border-color: navy !important;
     outline: navy !important;
     background-color: #428bca;
@@ -246,13 +246,17 @@ table {
 
 th, td {
     padding: 15px;
-    text-align: left;
     border-bottom: 1px solid #ddd;
+    text-align: center;
 }
 
-tr:hover {background-color: lightblue;}
+tr:hover {
+    background-color: lightblue;
+}
 
-tr:nth-child(even) {background-color: #f2f2f2;}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
 
 
 th {
@@ -260,15 +264,8 @@ th {
     color: white;
 }
 
-.quantity{
+.quantity {
     background: transparent;
     border: none;
     width: 30%;
-}
-
-th{
-    text-align: center;
-}
-td{
-    text-align: center;
 }

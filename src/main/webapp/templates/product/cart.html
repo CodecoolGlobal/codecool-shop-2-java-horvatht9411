@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<!--    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">-->
+    <!--    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">-->
     <meta charset="utf-8"/>
     <script src="/static/js/display_cart.js" defer></script>
     <meta name="author" content="Codecool"/>
@@ -32,10 +32,10 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
     <script src="https://kit.fontawesome.com/b0236555a9.js" crossorigin="anonymous"></script>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
-        <meta charset="utf-8"/>
-        <meta name="author" content="Codecool"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 </head>
 <body>
 <div th:replace="header.html :: copy"></div>
@@ -59,8 +59,7 @@
         <tr th:each="item: ${cart.keySet()}">
             <td th:text="${item.id}"></td>
             <td th:text="${item.name}"></td>
-            <td th:text="${item.defaultPrice} +' '+ ${item.defaultCurrency}" ></td>
-<!--            <td class="item-currency" th:text="${item.defaultCurrency}"></td>-->
+            <td th:text="${item.defaultPrice} +' '+ ${item.defaultCurrency}"></td>
             <td>
                 <div>
                     <input class="quantity" th:data-prod-id="${item.id}" type="text" th:value="${cart.get(item)}">
