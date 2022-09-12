@@ -3,39 +3,7 @@ const priceSum = document.querySelectorAll(".price-sum");
 const itemQuantity = document.querySelectorAll(".quantity");
 const deleteButton = document.querySelectorAll(".delete-item");
 const tableBody = document.querySelector("tbody");
-document.querySelector(".cart-qty").parentElement.textContent = '';
-
-async function apiPost(url, payload) {
-    let response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    if (response.ok) {
-        return response.json();
-    } else {
-        console.log(response.statusText);
-    }
-}
-
-async function apiDelete(url) {
-    let response = await fetch(url, {
-        method: "DELETE",
-    });
-    if (response.ok) {
-        return await response.json();
-    }
-}
-
-async function editQuantity(id, data) {
-    return await apiPost(`/api/editCart/${id}`, data);
-}
-
-async function deleteItem(id) {
-    return await apiDelete(`/api/removeFromCart/${id}`);
-}
+const cartQty = document.querySelector(".cart-qty");
 
 async function editCart() {
     for (let input of itemQuantity) {
@@ -61,6 +29,14 @@ async function deleteItemFromCart() {
     }
 }
 
+async function editQuantity(id, data) {
+    return await apiPost(`/api/editCart/${id}`, data);
+}
+
+async function deleteItem(id) {
+    return await apiDelete(`/api/removeFromCart/${id}`);
+}
+
 function totalPrices() {
     let total = 0;
     for (let price of priceSum) {
@@ -69,7 +45,36 @@ function totalPrices() {
     totalPrice.textContent = total.toString();
 }
 
+function hideCartQty() {
+    cartQty.parentElement.textContent = '';
+}
+
+async function apiPost(url, payload) {
+    let response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    if (response.ok) {
+        return response.json();
+    } else {
+        console.log(response.statusText);
+    }
+}
+
+async function apiDelete(url) {
+    let response = await fetch(url, {
+        method: "DELETE",
+    });
+    if (response.ok) {
+        return await response.json();
+    }
+}
+
 window.onload = async () => {
+    hideCartQty();
     totalPrices();
     await editCart();
     await deleteItemFromCart();
