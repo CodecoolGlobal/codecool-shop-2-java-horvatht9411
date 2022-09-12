@@ -30,7 +30,7 @@ async function deleteItemFromCart() {
 }
 
 async function editQuantity(id, data) {
-    return await apiPost(`/api/editCart/${id}`, data);
+    return await apiPut(`/api/editCart/${id}`, data);
 }
 
 async function deleteItem(id) {
@@ -49,18 +49,14 @@ function hideCartQty() {
     cartQty.parentElement.textContent = '';
 }
 
-async function apiPost(url, payload) {
-    let response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-            'Content-Type': 'application/json'
-        }
+async function apiPut(url, data) {
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data),
     });
     if (response.ok) {
         return response.json();
-    } else {
-        console.log(response.statusText);
     }
 }
 
