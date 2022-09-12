@@ -12,15 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 @WebServlet(urlPatterns = {"/api/addToCart/*", "/api/cartQty", "/api/editCart/*", "/api/removeFromCart/*"})
-public class AddCartController extends HttpServlet {
+public class CartQtyController extends HttpServlet {
     private Map<Product, Integer> cart = new HashMap<>();
     private final ProductDao productDataStore = ProductDaoMem.getInstance();
 
