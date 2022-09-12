@@ -1,7 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.mem.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.google.gson.Gson;
 
