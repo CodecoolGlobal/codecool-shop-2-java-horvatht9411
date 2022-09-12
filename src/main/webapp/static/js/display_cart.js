@@ -34,7 +34,7 @@ async function editQuantity(id, data) {
 }
 
 async function deleteItem(id) {
-    return await apiDelete(`/api/removeFromCart/${id}`);
+    return await apiDelete(`/api/editCart/${id}`);
 }
 
 function totalPrices() {

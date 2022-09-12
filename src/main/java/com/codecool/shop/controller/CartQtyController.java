@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/api/addToCart/*", "/api/cartQty", "/api/editCart/*", "/api/removeFromCart/*"})
+@WebServlet(urlPatterns = {"/api/cartQty", "/api/editCart/*"})
 public class CartQtyController extends HttpServlet {
     private Map<Product, Integer> cart = new HashMap<>();
     private final ProductDao productDataStore = ProductDaoMem.getInstance();
