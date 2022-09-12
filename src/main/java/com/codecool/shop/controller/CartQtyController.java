@@ -1,5 +1,7 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.google.gson.Gson;
 
@@ -10,20 +12,48 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
-@WebServlet(urlPatterns = {"/api/editCart/*", "/api/removeFromCart/*"})
-public class EditCartController extends HttpServlet {
+@WebServlet(urlPatterns = {"/api/cartQty", "/api/editCart/*"})
+public class CartQtyController extends HttpServlet {
     private Map<Product, Integer> cart = new HashMap<>();
+    private final ProductDao productDataStore = ProductDaoMem.getInstance();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = ControllerUtil.initResponse(response);
+        int quantity = getCartQty();
+        String var = new Gson().toJson(quantity);
+        out.println(var);
+        out.flush();
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = ControllerUtil.initResponse(response);
+
+        HttpSession session = request.getSession();
+        if (session.getAttribute("cart") != null) {
+            cart = (Map<Product, Integer>) session.getAttribute("cart");
+        }
+
+        int productId = ControllerUtil.retrieveProductId(request);
+        Product product = productDataStore.find(productId);
+        cart.put(product, cart.getOrDefault(product, 0) + 1);
+        session.setAttribute("cart", cart);
+
+        int quantity = getCartQty();
+        String json = new Gson().toJson(quantity);
+        out.println(json);
+        out.flush();
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = ControllerUtil.initResponse(response);
+
         HttpSession session = request.getSession();
         if (session.getAttribute("cart") != null) {
             cart = (Map<Product, Integer>) session.getAttribute("cart");
@@ -33,7 +63,7 @@ public class EditCartController extends HttpServlet {
         Product updatedProduct = cart.keySet()
                 .stream()
                 .filter(product -> product.getId() == productId).findFirst().orElse(null);
-        String updatedQuantity = inputStreamToString(request.getInputStream());
+        String updatedQuantity = ControllerUtil.inputStreamToString(request.getInputStream());
         cart.put(updatedProduct, Integer.valueOf(updatedQuantity));
 
         session.setAttribute("cart", cart);
@@ -66,11 +96,6 @@ public class EditCartController extends HttpServlet {
         out.flush();
     }
 
-    private static String inputStreamToString(InputStream inputStream) {
-        Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8);
-        return scanner.hasNext() ? scanner.useDelimiter("\\A").next() : "";
-    }
-
     private int calculateItemTotal(Product product) {
         return product.getDefaultPrice() * cart.get(product);
     }
@@ -82,5 +107,9 @@ public class EditCartController extends HttpServlet {
             bigTotal += itemTotal;
         }
         return bigTotal;
+    }
+
+    private int getCartQty() {
+        return cart.values().stream().reduce(0, Integer::sum);
     }
 }

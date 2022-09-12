@@ -3,7 +3,10 @@ package com.codecool.shop.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 public class ControllerUtil {
     static int retrieveProductId(HttpServletRequest req) {
@@ -19,5 +22,10 @@ public class ControllerUtil {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         return out;
+    }
+
+    static String inputStreamToString(InputStream inputStream) {
+        Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8);
+        return scanner.hasNext() ? scanner.useDelimiter("\\A").next() : "";
     }
 }
