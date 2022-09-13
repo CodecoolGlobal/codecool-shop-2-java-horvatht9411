@@ -19,12 +19,13 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
 
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
             resp.setCharacterEncoding("UTF-8");
             ProductService productService = new ProductService();
-
             TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
             WebContext context = new WebContext(req, resp, req.getServletContext());
 

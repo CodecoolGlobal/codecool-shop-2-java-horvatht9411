@@ -1,12 +1,10 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.service.LogService;
+import com.codecool.shop.service.ProductService;
 import com.google.gson.Gson;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +17,8 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = {"/api/cartQty", "/api/editCart/*"})
 public class CartQtyController extends HttpServlet {
+    private final ProductService productService = new ProductService();
     private Map<Product, Integer> cart = new HashMap<>();
-    private final ProductDao productDataStore = ProductDaoMem.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -46,7 +44,7 @@ public class CartQtyController extends HttpServlet {
             }
 
             int productId = ControllerUtil.retrieveProductId(request);
-            Product product = productDataStore.find(productId);
+            Product product = productService.findProduct(productId);
             cart.put(product, cart.getOrDefault(product, 0) + 1);
             session.setAttribute("cart", cart);
 
@@ -70,9 +68,7 @@ public class CartQtyController extends HttpServlet {
             }
 
             int productId = ControllerUtil.retrieveProductId(request);
-            Product updatedProduct = cart.keySet()
-                    .stream()
-                    .filter(product -> product.getId() == productId).findFirst().orElse(null);
+            Product updatedProduct = cart.keySet().stream().filter(product -> product.getId() == productId).findFirst().orElse(null);
             String updatedQuantity = ControllerUtil.inputStreamToString(request.getInputStream());
             cart.put(updatedProduct, Integer.valueOf(updatedQuantity));
 
@@ -99,9 +95,7 @@ public class CartQtyController extends HttpServlet {
                 cart = (Map<Product, Integer>) session.getAttribute("cart");
             }
             int productId = ControllerUtil.retrieveProductId(request);
-            Product deletedProduct = cart.keySet()
-                    .stream()
-                    .filter(item -> item.getId() == productId).findFirst().orElse(null);
+            Product deletedProduct = cart.keySet().stream().filter(item -> item.getId() == productId).findFirst().orElse(null);
             cart.remove(deletedProduct);
             session.setAttribute("cart", cart);
             int bigTotal = calculateBigTotal();

@@ -69,4 +69,22 @@ public class ProductDaoJdbc implements ProductDao {
             throw new RuntimeException("Error while reading all product by category", e);
         }
     }
+
+    @Override
+    public Product getById(int id) {
+        try (Connection connect = dataSource.getConnection()){
+            String sql = "SELECT * FROM product WHERE id = ? ";
+            PreparedStatement statement = connect.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()){
+                return null;
+            }
+            Product product = new Product(resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8));
+            product.setId(resultSet.getInt(1));
+            return product;
+        } catch (SQLException e){
+            throw new RuntimeException("Error while reading product by Id", e);
+        }
+    }
 }
