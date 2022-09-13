@@ -19,18 +19,6 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
     }
 
     @Override
-    public void add(ProductCategory category) {
-        //TODO maybe useless
-    }
-
-    @Override
-    public ProductCategory find(int id) {
-        return null;
-    }
-
-
-
-    @Override
     public List<ProductCategory> getAll() {
         try (Connection connect = dataSource.getConnection()){
             String sql = "SELECT * FROM productcategory";

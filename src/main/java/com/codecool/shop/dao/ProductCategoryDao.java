@@ -6,9 +6,6 @@ import java.util.List;
 
 public interface ProductCategoryDao {
 
-    void add(ProductCategory category);
-    ProductCategory find(int id);
-
     List<ProductCategory> getAll();
 
 }

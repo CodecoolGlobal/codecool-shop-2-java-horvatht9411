@@ -23,17 +23,6 @@ public class SupplierDaoJdbc implements SupplierDao {
     }
 
     @Override
-    public void add(Supplier supplier) {
-
-    }
-
-    @Override
-    public Supplier find(int id) {
-        return null;
-    }
-
-
-    @Override
     public Set<Supplier> getAll() {
         try (Connection connect = dataSource.getConnection()){
             String sql = "SELECT * FROM suppliers";
