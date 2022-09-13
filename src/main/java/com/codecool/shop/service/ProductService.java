@@ -30,59 +30,16 @@ public class ProductService {
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
     private SupplierDao supplierDao;
-    private Properties appProps = new Properties();
 
 
     public ProductService() {
-        run();
-    }
+       DbManager manager = new DbManager();
+       manager.run();
+       userDao = manager.getUserDao();
+       productDao = manager.getProductDao();
+       productCategoryDao = manager.getProductCategoryDao();
+       supplierDao = manager.getSupplierDao();
 
-    public void run() {
-        try {
-            String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-            String appConfigPath = rootPath + "connection.properties";
-            appProps.load(new FileInputStream(appConfigPath));
-        } catch (IOException e) {
-            LogService.log(e);
-        }
-        try {
-            if (appProps.getProperty("dao").equals("db")) {
-                setupDB();
-            }
-            if (appProps.getProperty("dao").equals("memory")) {
-                setupMEM();
-            }
-        } catch (SQLException throwables) {
-            System.err.println("Could not connect to the database.");
-        }
-    }
-
-    private void setupDB() throws SQLException {
-        DataSource dataSource = connect();
-        userDao = new UserDaoJdbc(dataSource);
-        productDao = new ProductDaoJdbc(dataSource);
-        productCategoryDao = new ProductCategoryDaoJdbc(dataSource);
-        supplierDao = new SupplierDaoJdbc(dataSource);
-    }
-
-    private void setupMEM() {
-        this.productDao = ProductDaoMem.getInstance();
-        this.productCategoryDao = ProductCategoryDaoMem.getInstance();
-        this.supplierDao = SupplierDaoMem.getInstance();
-    }
-
-    private DataSource connect() throws SQLException {
-        PGSimpleDataSource dataSource = new PGSimpleDataSource();
-
-        dataSource.setDatabaseName(appProps.getProperty("database"));
-        dataSource.setUser(appProps.getProperty("user"));
-        dataSource.setPassword(appProps.getProperty("password"));
-
-        System.out.println("Trying to connect...");
-        dataSource.getConnection().close();
-        System.out.println("Connection OK");
-
-        return dataSource;
     }
 
 

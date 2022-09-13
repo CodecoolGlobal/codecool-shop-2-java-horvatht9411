@@ -21,7 +21,7 @@ public class CategoryController extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        productService.run();
+        new ProductService();
         String json = new Gson().toJson((productService.getProductsForCategory(Integer.parseInt(request.getParameter("category")))));
         out.println(json);
     }

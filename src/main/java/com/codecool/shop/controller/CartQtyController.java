@@ -47,6 +47,7 @@ public class CartQtyController extends HttpServlet {
             Product product = productService.findProduct(productId);
             cart.put(product, cart.getOrDefault(product, 0) + 1);
             session.setAttribute("cart", cart);
+            System.out.println(cart);
 
             int quantity = getCartQty();
             String json = new Gson().toJson(quantity);
