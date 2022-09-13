@@ -1,10 +1,5 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.DBManager;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoJdbc;
 import com.codecool.shop.service.ProductService;
 import com.google.gson.Gson;
 
@@ -15,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 @WebServlet(urlPatterns = {"/api/category"})
 public class CategoryController extends HttpServlet {

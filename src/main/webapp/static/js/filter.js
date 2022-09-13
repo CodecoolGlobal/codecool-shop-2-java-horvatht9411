@@ -24,6 +24,7 @@ async function initSupplierMenu() {
 }
 
 async function getSelectedSupplier(supplier) {
+    console.log(supplier)
     const url = `/api/supplier?supplier=${supplier}`;
     return await apiGet(url);
 }

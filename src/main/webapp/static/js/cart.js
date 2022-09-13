@@ -50,8 +50,8 @@ async function apiPost(url, payload) {
 }
 
 window.onload = async () => {
-    await updateCartQty();
-    addToCart();
+    // await updateCartQty();
+    // addToCart();
     await initSupplierMenu();
     await initCategoryMenu();
 }

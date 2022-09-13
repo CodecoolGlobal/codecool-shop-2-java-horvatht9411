@@ -7,6 +7,7 @@ import com.codecool.shop.model.Supplier;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,41 +22,51 @@ public class ProductDaoJdbc implements ProductDao {
     }
 
     @Override
-    public void add(Product product) {
-
-    }
-
-    @Override
-    public Product find(int id) {
-        return null;
-    }
-
-
-    @Override
     public List<Product> getAll() {
 
         try (Connection connect = dataSource.getConnection()){
             String sql = "SELECT * FROM product";
             ResultSet resultSet = connect.createStatement().executeQuery(sql);
-            List<Product> result = new ArrayList<>();
-            while (resultSet.next()){
-                Product product = new Product(resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8));
-                product.setId(resultSet.getInt(1));
-                result.add(product);
-            }
-            return result;
+            return getProducts(resultSet);
         } catch (SQLException e){
             throw new RuntimeException("Error while reading all product", e);
         }
     }
 
+
     @Override
-    public List<Product> getBy(Supplier supplier) {
-        return null;
+    public List<Product> getBySupplier(int supplierId) {
+        try (Connection connect = dataSource.getConnection()){
+            String sql = "SELECT * FROM product WHERE supplier_id=?";
+            PreparedStatement statement = connect.prepareStatement(sql);
+            statement.setInt(1, supplierId);
+            ResultSet resultSet = statement.executeQuery();
+            return getProducts(resultSet);
+        } catch (SQLException e){
+            throw new RuntimeException("Error while reading all product by supplier", e);
+        }
+    }
+
+    private List<Product> getProducts(ResultSet resultSet) throws SQLException {
+        List<Product> result = new ArrayList<>();
+        while (resultSet.next()){
+            Product product = new Product(resultSet.getString(2), resultSet.getInt(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8));
+            product.setId(resultSet.getInt(1));
+            result.add(product);
+        }
+        return result;
     }
 
     @Override
-    public List<Product> getBy(ProductCategory productCategory) {
-        return null;
+    public List<Product> getByCategory(int categoryId) {
+        try (Connection connect = dataSource.getConnection()){
+            String sql = "SELECT * FROM product WHERE category_id = ? ";
+            PreparedStatement statement = connect.prepareStatement(sql);
+            statement.setInt(1, categoryId);
+            ResultSet resultSet = statement.executeQuery();
+            return getProducts(resultSet);
+        } catch (SQLException e){
+            throw new RuntimeException("Error while reading all product by category", e);
+        }
     }
 }

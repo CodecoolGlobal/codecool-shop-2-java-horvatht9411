@@ -1,22 +1,22 @@
-package com.codecool.shop.controller;
-
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.model.Product;
-import com.google.gson.Gson;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-
-@WebServlet(urlPatterns = {"/api/addToCart/*", "/api/cartQty"})
-public class AddCartController extends HttpServlet {
+//package com.codecool.shop.controller;
+//
+//import com.codecool.shop.dao.ProductDao;
+//import com.codecool.shop.model.Product;
+//import com.google.gson.Gson;
+//
+//import javax.servlet.ServletException;
+//import javax.servlet.annotation.WebServlet;
+//import javax.servlet.http.HttpServlet;
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpSession;
+//import java.io.IOException;
+//import java.io.PrintWriter;
+//import java.util.HashMap;
+//import java.util.Map;
+//
+//@WebServlet(urlPatterns = {"/api/addToCart/*", "/api/cartQty"})
+//public class AddCartController extends HttpServlet {
 //    private Map<Product, Integer> cart = new HashMap<>();
 //    private final ProductDao productDataStore = ProductDaoMem.getInstance();
 //
@@ -51,4 +51,4 @@ public class AddCartController extends HttpServlet {
 //    private int getCartQty() {
 //        return cart.values().stream().reduce(0, Integer::sum);
 //    }
-}
+//}

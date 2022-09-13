@@ -37,11 +37,6 @@ public class ProductService {
         supplierDao = new SupplierDaoJdbc(dataSource);
     }
 
-//    public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao) {
-//        this.productDao = productDao;
-//        this.productCategoryDao = productCategoryDao;
-//        this.supplierDao = supplierDao;
-//    }
 
     public void run() {
         try {
@@ -67,31 +62,24 @@ public class ProductService {
     }
 
 
-    public ProductCategory getProductCategory(int categoryId) {
-        return productCategoryDao.find(categoryId);
-    }
-
     public List<Product> getProductsForCategory(int categoryId) {
-        var category = productCategoryDao.find(categoryId);
-        return productDao.getBy(category);
+        return productDao.getByCategory(categoryId);
     }
 
-
-    public List<ProductCategory> getAllProductCategory() {
-        return productCategoryDao.getAll();
+    public List<Product> getProductsForSupplier(int supplierId) {
+        return productDao.getBySupplier(supplierId);
     }
 
     public List<Product> getAllProduct() {
         return productDao.getAll();
     }
 
-    public Set<Supplier> getAllSupplier() {
-        return supplierDao.getAll();
+    public List<ProductCategory> getAllProductCategory() {
+        return productCategoryDao.getAll();
     }
 
-    public List<Product> getProductsForSupplier(int supplierId) {
-        var supplier = supplierDao.find(supplierId);
-        return productDao.getBy(supplier);
+    public Set<Supplier> getAllSupplier() {
+        return supplierDao.getAll();
     }
 
 }

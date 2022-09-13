@@ -1,8 +1,5 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.service.ProductService;
 import com.google.gson.Gson;
 
