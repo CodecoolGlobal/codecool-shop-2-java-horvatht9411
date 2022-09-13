@@ -12,7 +12,7 @@ function addToCart() {
 }
 
 function sendProductToCart(id, productId) {
-    const url = `/api/addToCart/${id}`;
+    const url = `/api/editCart/${id}`;
     return apiPost(url, productId);
 }
 
