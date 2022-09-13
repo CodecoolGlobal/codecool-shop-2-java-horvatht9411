@@ -6,11 +6,11 @@ public class Product extends BaseModel {
 
     private int defaultPrice;
     private Currency defaultCurrency;
-    private ProductCategory productCategory;
-    private Supplier supplier;
+    private int productCategory;
+    private int supplier;
     private String imgURL;
 
-    public Product(String name, int defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier, String imageUrl) {
+    public Product(String name, int defaultPrice, String currencyString, String description, String imageUrl, int productCategory, int supplier) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
@@ -43,16 +43,15 @@ public class Product extends BaseModel {
         this.defaultCurrency = Currency.getInstance(currency);
     }
 
-    public ProductCategory getProductCategory() {
+    public int getProductCategory() {
         return productCategory;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
+    public void setProductCategory(int productCategory) {
         this.productCategory = productCategory;
-        this.productCategory.addProduct(this);
     }
 
-    public Supplier getSupplier() {
+    public int getSupplier() {
         return supplier;
     }
 
@@ -60,9 +59,8 @@ public class Product extends BaseModel {
         return imgURL;
     }
 
-    public void setSupplier(Supplier supplier) {
+    public void setSupplier(int supplier) {
         this.supplier = supplier;
-        this.supplier.addProduct(this);
     }
 
     public void setImageURL(String imgURL) {
@@ -83,8 +81,8 @@ public class Product extends BaseModel {
                 this.name,
                 this.defaultPrice,
                 this.defaultCurrency.toString(),
-                this.productCategory.getName(),
-                this.supplier.getName(),
+                this.productCategory,
+                this.supplier,
                 this.imgURL);
     }
 }
