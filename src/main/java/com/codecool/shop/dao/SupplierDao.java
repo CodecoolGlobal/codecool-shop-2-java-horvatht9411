@@ -9,4 +9,6 @@ public interface SupplierDao {
     Set<Supplier> getAll();
 
     Supplier getById(int id);
+
+    void add(Supplier supplier);
 }

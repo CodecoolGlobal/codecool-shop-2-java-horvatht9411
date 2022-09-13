@@ -10,4 +10,5 @@ public interface ProductCategoryDao {
 
     ProductCategory getById(int id);
 
+    void add(ProductCategory category);
 }

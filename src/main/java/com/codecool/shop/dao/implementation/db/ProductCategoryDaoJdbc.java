@@ -1,7 +1,6 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.db;
 
 import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 
 import javax.sql.DataSource;
@@ -27,9 +26,9 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
             ResultSet resultSet = connect.createStatement().executeQuery(sql);
             List<ProductCategory> result = new ArrayList<>();
             while (resultSet.next()){
-                ProductCategory productCategory = new ProductCategory(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4));
-                productCategory.setId(resultSet.getInt(1));
-                result.add(productCategory);
+                ProductCategory author = new ProductCategory(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4));
+                author.setId(resultSet.getInt(1));
+                result.add(author);
             }
             return result;
         } catch (SQLException e){
@@ -53,5 +52,10 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
         } catch (SQLException e){
             throw new RuntimeException("Error while reading product by Id", e);
         }
+    }
+
+    @Override
+    public void add(ProductCategory category) {
+
     }
 }

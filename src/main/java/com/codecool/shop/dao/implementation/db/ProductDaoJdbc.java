@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.db;
 
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
@@ -86,5 +86,10 @@ public class ProductDaoJdbc implements ProductDao {
         } catch (SQLException e){
             throw new RuntimeException("Error while reading product by Id", e);
         }
+    }
+
+    @Override
+    public void add(Product product) {
+
     }
 }

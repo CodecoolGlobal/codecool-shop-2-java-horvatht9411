@@ -8,6 +8,8 @@ public class Product extends BaseModel {
     private Currency defaultCurrency;
     private int productCategory;
     private int supplier;
+    private ProductCategory productCategoryMem;
+    private Supplier supplierMem;
     private String imgURL;
 
     public Product(String name, int defaultPrice, String currencyString, String description, String imageUrl, int productCategory, int supplier) {
@@ -17,6 +19,15 @@ public class Product extends BaseModel {
         this.setProductCategory(productCategory);
         this.setImageURL(imageUrl);
     }
+
+    public Product(String name, int defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier, String imageUrl) {
+        super(name, description);
+        this.setPrice(defaultPrice, currencyString);
+        this.setSupplierMem(supplier);
+        this.setProductCategoryMem(productCategory);
+        this.setImageURL(imageUrl);
+    }
+
 
     public int getDefaultPrice() {
         return defaultPrice;
@@ -65,6 +76,22 @@ public class Product extends BaseModel {
 
     public void setImageURL(String imgURL) {
         this.imgURL = imgURL;
+    }
+
+    public ProductCategory getProductCategoryMem() {
+        return productCategoryMem;
+    }
+
+    public Supplier getSupplierMem() {
+        return supplierMem;
+    }
+
+    public void setProductCategoryMem(ProductCategory productCategoryMem) {
+        this.productCategoryMem = productCategoryMem;
+    }
+
+    public void setSupplierMem(Supplier supplierMem) {
+        this.supplierMem = supplierMem;
     }
 
     @Override
