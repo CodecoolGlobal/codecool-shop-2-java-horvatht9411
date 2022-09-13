@@ -1,6 +1,8 @@
 package com.codecool.shop.model;
 
 
+import com.codecool.shop.service.LogService;
+
 import java.lang.reflect.Field;
 
 public class BaseModel {
@@ -52,7 +54,9 @@ public class BaseModel {
                 if (value != null) {
                     sb.append(field.getName()).append(":").append(value).append(",");
                 }
-            } catch (IllegalAccessException e) {}
+            } catch (IllegalAccessException e) {
+                LogService.log(e);
+            }
         }
         return sb.toString();
     }
