@@ -63,11 +63,13 @@ public class ProductService {
 
 
     public List<Product> getProductsForCategory(int categoryId) {
-        return productDao.getByCategory(categoryId);
+        var category = productCategoryDao.getById(categoryId);
+        return productDao.getByCategory(category);
     }
 
     public List<Product> getProductsForSupplier(int supplierId) {
-        return productDao.getBySupplier(supplierId);
+        var supplier = supplierDao.getById(supplierId);
+        return productDao.getBySupplier(supplier);
     }
 
     public List<Product> getAllProduct() {

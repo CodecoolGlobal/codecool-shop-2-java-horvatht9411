@@ -35,11 +35,11 @@ public class ProductDaoJdbc implements ProductDao {
 
 
     @Override
-    public List<Product> getBySupplier(int supplierId) {
+    public List<Product> getBySupplier(Supplier supplier) {
         try (Connection connect = dataSource.getConnection()){
             String sql = "SELECT * FROM product WHERE supplier_id=?";
             PreparedStatement statement = connect.prepareStatement(sql);
-            statement.setInt(1, supplierId);
+            statement.setInt(1, supplier.getId());
             ResultSet resultSet = statement.executeQuery();
             return getProducts(resultSet);
         } catch (SQLException e){
@@ -58,11 +58,11 @@ public class ProductDaoJdbc implements ProductDao {
     }
 
     @Override
-    public List<Product> getByCategory(int categoryId) {
+    public List<Product> getByCategory(ProductCategory category) {
         try (Connection connect = dataSource.getConnection()){
             String sql = "SELECT * FROM product WHERE category_id = ? ";
             PreparedStatement statement = connect.prepareStatement(sql);
-            statement.setInt(1, categoryId);
+            statement.setInt(1, category.getId());
             ResultSet resultSet = statement.executeQuery();
             return getProducts(resultSet);
         } catch (SQLException e){

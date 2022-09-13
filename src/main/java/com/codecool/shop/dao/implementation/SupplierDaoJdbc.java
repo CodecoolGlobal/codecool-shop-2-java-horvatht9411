@@ -6,6 +6,7 @@ import com.codecool.shop.model.Supplier;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,4 +39,23 @@ public class SupplierDaoJdbc implements SupplierDao {
             throw new RuntimeException("Error while reading all suppliers", e);
         }
     }
+
+    @Override
+    public Supplier getById(int id) {
+        try (Connection connect = dataSource.getConnection()){
+            String sql = "SELECT * FROM suppliers WHERE id = ? ";
+            PreparedStatement statement = connect.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()){
+                return null;
+            }
+            Supplier supplier = new Supplier(resultSet.getString(2), resultSet.getString(3));
+            supplier.setId(resultSet.getInt(1));
+            return supplier;
+        } catch (SQLException e){
+            throw new RuntimeException("Error while reading product by Id", e);
+        }
+    }
+
 }

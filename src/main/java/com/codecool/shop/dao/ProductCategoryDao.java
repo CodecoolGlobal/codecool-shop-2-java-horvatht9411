@@ -8,4 +8,6 @@ public interface ProductCategoryDao {
 
     List<ProductCategory> getAll();
 
+    ProductCategory getById(int id);
+
 }

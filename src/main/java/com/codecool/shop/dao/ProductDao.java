@@ -9,8 +9,8 @@ import java.util.List;
 public interface ProductDao {
 
     List<Product> getAll();
-    List<Product> getBySupplier(int supplier);
-    List<Product> getByCategory(int category);
+    List<Product> getBySupplier(Supplier supplier);
+    List<Product> getByCategory(ProductCategory category);
 
     Product getById(int id);
 

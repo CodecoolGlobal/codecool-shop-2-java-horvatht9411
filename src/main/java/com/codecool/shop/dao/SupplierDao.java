@@ -6,6 +6,7 @@ import java.util.Set;
 
 public interface SupplierDao {
 
-
     Set<Supplier> getAll();
+
+    Supplier getById(int id);
 }
