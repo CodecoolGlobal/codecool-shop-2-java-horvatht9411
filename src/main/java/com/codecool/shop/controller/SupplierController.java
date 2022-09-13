@@ -6,6 +6,7 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.service.LogService;
 import com.codecool.shop.service.ProductService;
 import com.google.gson.Gson;
 
@@ -26,13 +27,15 @@ public class SupplierController extends HttpServlet {
     ProductService productService = new ProductService(productDataStore, productCategoryDataStore, supplierDataStore);
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
-        String json = new Gson().toJson((productService.getProductsForSupplier(Integer.parseInt(request.getParameter("supplier")))));
-        out.println(json);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
+            String json = new Gson().toJson((productService.getProductsForSupplier(Integer.parseInt(request.getParameter("supplier")))));
+            out.println(json);
+        } catch (IOException e) {
+            LogService.log(e);
+        }
     }
 }
-
-

@@ -1,5 +1,7 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.service.LogService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -17,11 +19,16 @@ public class ControllerUtil {
         return Integer.parseInt(pathInfo);
     }
 
-    static PrintWriter initResponse(HttpServletResponse response) throws IOException {
-        PrintWriter out = response.getWriter();
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        return out;
+    static PrintWriter initResponse(HttpServletResponse response) {
+        try {
+            PrintWriter out = response.getWriter();
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            return out;
+        } catch (IOException e) {
+            LogService.log(e);
+        }
+        return null;
     }
 
     static String inputStreamToString(InputStream inputStream) {
