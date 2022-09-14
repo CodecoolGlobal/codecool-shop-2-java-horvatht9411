@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">-->
+    <meta charset="utf-8"/>
+    <script src="/static/js/display_cart.js" defer></script>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Kosár</title>
+    <script src="/static/js/filter.js" defer></script>
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+        <link rel="stylesheet" type="text/css" href="/static/css/checkout.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <script src="https://kit.fontawesome.com/b0236555a9.js" crossorigin="anonymous"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+</head>
+<body>
+<div th:replace="header.html :: copy"></div>
+<div class="cart-container">
+    <h4>Szállítási információk</h4>
+    <br><br><br><br><br><br>
+    <div class="row">
+        <div class="col-75">
+            <div class="container">
+                <form action="/action_page.php">
+
+                    <div class="row">
+                        <div class="col-50">
+                            <h3>Számlázási cím</h3>
+                            <label for="fname"><i class="fa fa-user"></i> Név</label>
+                            <input type="text" id="fname" name="firstname" placeholder="Rend Elek">
+                            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                            <input type="text" id="email" name="email" placeholder="rend@elek.com">
+                            <label for="city"><i class="fa fa-institution"></i> Város</label>
+                            <input type="text" id="city" name="city" placeholder="Település">
+                            <label for="adr"><i class="fa fa-address-card-o"></i>Cím</label>
+                            <input type="text" id="adr" name="address" placeholder="Utca 2">
+
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="state">Megye</label>
+                                    <input type="text" id="state" name="state" placeholder="Pest">
+                                </div>
+                                <div class="col-50">
+                                    <label for="zip">Irányítószám</label>
+                                    <input type="text" id="zip" name="zip" placeholder="1234">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-50">
+                            <h3>Fizetés</h3>
+                            <label for="fname">Elfogadott kártyák</label>
+                            <div class="icon-container">
+                                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                <i class="fa fa-cc-discover" style="color:orange;"></i>
+                            </div>
+                            <label for="cname">Kártyán szereplő név</label>
+                            <input type="text" id="cname" name="cardname" placeholder="Rend Elek">
+                            <label for="ccnum">Kártya száma</label>
+                            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                            <label for="expmonth">Lejárati hónap</label>
+                            <input type="text" id="expmonth" name="expmonth" placeholder="Szeptember">
+
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="expyear">Lejárati év</label>
+                                    <input type="text" id="expyear" name="expyear" placeholder="2018">
+                                </div>
+                                <div class="col-50">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="123">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <label>
+                        <input type="checkbox" checked="checked" name="sameadr"> A szállítási cím megegyezik a számlázási címmel
+                    </label>
+                    <a class="btn btn-success add-to-cart" href="/confirm">Rendelés véglegesítése</a>
+                </form>
+            </div>
+        </div>
+
+<!--        <div class="col-25">-->
+<!--            <div class="container">-->
+<!--                <h4>Cart-->
+<!--                    <span class="price" style="color:black">-->
+<!--          <i class="fa fa-shopping-cart"></i>-->
+<!--          <b>4</b>-->
+<!--        </span>-->
+<!--                </h4>-->
+<!--                <p><a href="#">Product 1</a> <span class="price">$15</span></p>-->
+<!--                <p><a href="#">Product 2</a> <span class="price">$5</span></p>-->
+<!--                <p><a href="#">Product 3</a> <span class="price">$8</span></p>-->
+<!--                <p><a href="#">Product 4</a> <span class="price">$2</span></p>-->
+<!--                <hr>-->
+<!--                <p>Total <span class="price" style="color:black"><b>$30</b></span></p>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<div th:replace="footer.html :: copy"></div>
+</body>
+</html>
