@@ -3,7 +3,7 @@
 <head>
     <!--    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">-->
     <meta charset="utf-8"/>
-<!--    <script src="/static/js/display_cart.js" defer></script>-->
+    <script src="/static/js/checkout.js" defer></script>
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -39,8 +39,9 @@
 <body>
 <div th:replace="header.html :: copy"></div>
 <div class="cart-container">
+    <br><br>
     <h4>Szállítási információk</h4>
-    <br><br><br><br><br><br>
+    <br><br>
     <div class="row">
         <div class="col-75">
             <div class="container">
@@ -117,7 +118,7 @@
                 </h4>
                 <div th:each="cartItem : ${cartItems.keySet()}">
                     <p><span th:text="${cartItem.name}">Product 1</span>
-                        <span  th:text=" - + ' ' + ${cartItems.get(cartItem)} + ' ' + db">0</span>
+                        <span  th:text="${cartItems.get(cartItem)} + ' ' + db">0</span>
                         <span class="price" th:text="${cartItem.defaultPrice * cartItems.get(cartItem)} +' '+ ${cartItem.defaultCurrency}">$15</span>
                     </p>
                 </div>

@@ -15,8 +15,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/shipping"})
-public class ShippingController extends HttpServlet {
+
+@WebServlet(urlPatterns = {"/checkout"})
+public class CheckoutController extends HttpServlet {
+
     private Map<Product, Integer> cart = new HashMap<>();
 
     @Override
@@ -41,7 +43,7 @@ public class ShippingController extends HttpServlet {
             }
 
             TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
-            engine.process("product/shipping.html", context, response.getWriter());
+            engine.process("product/checkout.html", context, response.getWriter());
         } catch (IOException e) {
             LogService.log(e);
         }

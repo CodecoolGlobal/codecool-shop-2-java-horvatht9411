@@ -1,14 +1,14 @@
 .row {
-    display: -ms-flexbox !important;
-    display: flex !important;
-    -ms-flex-wrap: wrap !important;
-    flex-wrap: wrap !important;
-    margin: 0 -16px !important;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0 -16px;
 }
 
 .col-25 {
-    -ms-flex: 25% !important;
-    flex: 25% !important;
+    -ms-flex: 25%;
+    flex: 25%;
 }
 
 .col-50 {
