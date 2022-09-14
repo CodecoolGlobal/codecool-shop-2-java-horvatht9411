@@ -108,22 +108,24 @@
             </div>
         </div>
 
-<!--        <div class="col-25">-->
-<!--            <div class="container">-->
-<!--                <h4>Cart-->
-<!--                    <span class="price" style="color:black">-->
-<!--          <i class="fa fa-shopping-cart"></i>-->
-<!--          <b>4</b>-->
-<!--        </span>-->
-<!--                </h4>-->
-<!--                <p><a href="#">Product 1</a> <span class="price">$15</span></p>-->
-<!--                <p><a href="#">Product 2</a> <span class="price">$5</span></p>-->
-<!--                <p><a href="#">Product 3</a> <span class="price">$8</span></p>-->
-<!--                <p><a href="#">Product 4</a> <span class="price">$2</span></p>-->
-<!--                <hr>-->
-<!--                <p>Total <span class="price" style="color:black"><b>$30</b></span></p>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="col-25">
+            <div class="container">
+                <h4>Kosár
+                    <span class="price" style="color:black">
+          <i class="fa fa-shopping-cart"></i>
+          <b th:text="${cartSize}">0</b>
+        </span>
+                </h4>
+                <div th:each="cartItem : ${cartItems.keySet()}">
+                    <p><span th:text="${cartItem.name}">Product 1</span>
+                        <span  th:text=" ' -' + ' ' + ${cartItems.get(cartItem)} + ' ' + db">0</span>
+                        <span class="price" th:text="${cartItem.defaultPrice * cartItems.get(cartItem)} +' '+ ${cartItem.defaultCurrency}">$15</span>
+                    </p>
+                </div>
+                <hr>
+                <p>Végösszeg <span class="price" style="color:black" th:text="${bigTotal}+ ' ' + HUF"><b>30</b></span></p>
+            </div>
+        </div>
     </div>
 </div>
 <div th:replace="footer.html :: copy"></div>
