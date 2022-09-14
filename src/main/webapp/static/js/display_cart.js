@@ -4,6 +4,7 @@ const itemQuantity = document.querySelectorAll(".quantity");
 const deleteButton = document.querySelectorAll(".delete-item");
 const tableBody = document.querySelector("tbody");
 const cartQty = document.querySelector(".cart-qty");
+const searchBar = document.querySelector("#search-input");
 
 async function editCart() {
     for (let input of itemQuantity) {
@@ -46,6 +47,7 @@ function totalPrices() {
 }
 
 function hideCartQty() {
+    searchBar.parentElement.textContent = '';
     cartQty.parentElement.textContent = '';
 }
 

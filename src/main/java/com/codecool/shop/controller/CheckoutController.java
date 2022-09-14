@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/shipping"})
-public class ShippingController extends HttpServlet {
+@WebServlet(urlPatterns = {"/checkout"})
+public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -20,7 +20,7 @@ public class ShippingController extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
             WebContext context = new WebContext(request, response, request.getServletContext());
-            engine.process("product/shipping.html", context, response.getWriter());
+            engine.process("product/checkout.html", context, response.getWriter());
         } catch (IOException e) {
             LogService.log(e);
         }
