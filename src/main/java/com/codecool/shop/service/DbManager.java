@@ -5,7 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.dao.implementation.UserDaoJdbc;
+import com.codecool.shop.dao.implementation.db.UserDaoJdbc;
 import com.codecool.shop.dao.implementation.db.ProductCategoryDaoJdbc;
 import com.codecool.shop.dao.implementation.db.ProductDaoJdbc;
 import com.codecool.shop.dao.implementation.db.SupplierDaoJdbc;
