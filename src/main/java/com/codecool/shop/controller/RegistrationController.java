@@ -6,6 +6,7 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.LogService;
 import com.codecool.shop.service.UserService;
+import com.google.gson.Gson;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
@@ -43,14 +45,26 @@ public class RegistrationController extends HttpServlet {
         String name = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        try {
-            byte[] salt = PasswordHashing.generateSalt();
-            byte[] hashedPassword = PasswordHashing.hashPassword(password, salt);
-            User newUser = new User(name, email, hashedPassword, salt);
-            userService.addNewUser(newUser);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new RuntimeException(e);
+        System.out.println(name);
+        System.out.println(email);
+        System.out.println(password);
+        if (isNewUser(email)) {
+            try {
+                byte[] salt = PasswordHashing.generateSalt();
+                byte[] hashedPassword = PasswordHashing.hashPassword(password, salt);
+                User newUser = new User(name, email, hashedPassword, salt);
+                userService.addNewUser(newUser);
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+                throw new RuntimeException(e);
+            }
+            response.sendRedirect("/login");
+        } else {
+            // TODO
         }
-        response.sendRedirect("/login");
+    }
+
+    private boolean isNewUser(String email) {
+        User user = userService.getUserByEmail(email);
+        return user == null;
     }
 }
