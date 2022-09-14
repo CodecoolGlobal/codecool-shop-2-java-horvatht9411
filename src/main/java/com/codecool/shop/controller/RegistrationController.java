@@ -48,8 +48,6 @@ public class RegistrationController extends HttpServlet {
             byte[] hashedPassword = PasswordHashing.hashPassword(password, salt);
             User newUser = new User(name, email, hashedPassword, salt);
             userService.addNewUser(newUser);
-            System.out.println(Arrays.toString(salt));
-            System.out.println(Arrays.toString(hashedPassword));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }
