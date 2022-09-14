@@ -6,17 +6,28 @@ public class Product extends BaseModel {
 
     private int defaultPrice;
     private Currency defaultCurrency;
-    private ProductCategory productCategory;
-    private Supplier supplier;
+    private int productCategory;
+    private int supplier;
+    private ProductCategory productCategoryMem;
+    private Supplier supplierMem;
     private String imgURL;
 
-    public Product(String name, int defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier, String imageUrl) {
+    public Product(String name, int defaultPrice, String currencyString, String description, String imageUrl, int productCategory, int supplier) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
         this.setImageURL(imageUrl);
     }
+
+    public Product(String name, int defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier, String imageUrl) {
+        super(name, description);
+        this.setPrice(defaultPrice, currencyString);
+        this.setSupplierMem(supplier);
+        this.setProductCategoryMem(productCategory);
+        this.setImageURL(imageUrl);
+    }
+
 
     public int getDefaultPrice() {
         return defaultPrice;
@@ -43,16 +54,15 @@ public class Product extends BaseModel {
         this.defaultCurrency = Currency.getInstance(currency);
     }
 
-    public ProductCategory getProductCategory() {
+    public int getProductCategory() {
         return productCategory;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
+    public void setProductCategory(int productCategory) {
         this.productCategory = productCategory;
-        this.productCategory.addProduct(this);
     }
 
-    public Supplier getSupplier() {
+    public int getSupplier() {
         return supplier;
     }
 
@@ -60,13 +70,28 @@ public class Product extends BaseModel {
         return imgURL;
     }
 
-    public void setSupplier(Supplier supplier) {
+    public void setSupplier(int supplier) {
         this.supplier = supplier;
-        this.supplier.addProduct(this);
     }
 
     public void setImageURL(String imgURL) {
         this.imgURL = imgURL;
+    }
+
+    public ProductCategory getProductCategoryMem() {
+        return productCategoryMem;
+    }
+
+    public Supplier getSupplierMem() {
+        return supplierMem;
+    }
+
+    public void setProductCategoryMem(ProductCategory productCategoryMem) {
+        this.productCategoryMem = productCategoryMem;
+    }
+
+    public void setSupplierMem(Supplier supplierMem) {
+        this.supplierMem = supplierMem;
     }
 
     @Override
@@ -83,8 +108,8 @@ public class Product extends BaseModel {
                 this.name,
                 this.defaultPrice,
                 this.defaultCurrency.toString(),
-                this.productCategory.getName(),
-                this.supplier.getName(),
+                this.productCategory,
+                this.supplier,
                 this.imgURL);
     }
 }

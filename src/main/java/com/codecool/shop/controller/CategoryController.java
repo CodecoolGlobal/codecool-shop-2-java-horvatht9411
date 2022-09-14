@@ -1,11 +1,5 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.service.ProductService;
 import com.google.gson.Gson;
 
@@ -19,16 +13,15 @@ import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = {"/api/category"})
 public class CategoryController extends HttpServlet {
-    private final ProductDao productDataStore = ProductDaoMem.getInstance();
-    private final ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-    private final SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-    ProductService productService = new ProductService(productDataStore, productCategoryDataStore, supplierDataStore);
+
+    ProductService productService = new ProductService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
+        new ProductService();
         String json = new Gson().toJson((productService.getProductsForCategory(Integer.parseInt(request.getParameter("category")))));
         out.println(json);
     }
