@@ -118,7 +118,7 @@
                 </h4>
                 <div th:each="cartItem : ${cartItems.keySet()}">
                     <p><span th:text="${cartItem.name}">Product 1</span>
-                        <span  th:text="${cartItems.get(cartItem)} + ' ' + db">0</span>
+                        <span  th:text=" ' -' + ' ' + ${cartItems.get(cartItem)} + ' ' + db">0</span>
                         <span class="price" th:text="${cartItem.defaultPrice * cartItems.get(cartItem)} +' '+ ${cartItem.defaultCurrency}">$15</span>
                     </p>
                 </div>
