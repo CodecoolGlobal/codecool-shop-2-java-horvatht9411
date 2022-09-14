@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.mem;
 
 
 import com.codecool.shop.dao.ProductDao;
@@ -28,33 +28,30 @@ public class ProductDaoMem implements ProductDao {
     }
 
     @Override
-    public void add(Product product) {
-        product.setId(data.size() + 1);
-        data.add(product);
-    }
-
-    @Override
-    public Product find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
-    }
-
-    @Override
-    public void remove(int id) {
-        data.remove(find(id));
-    }
-
-    @Override
     public List<Product> getAll() {
         return data;
     }
 
     @Override
-    public List<Product> getBy(Supplier supplier) {
-        return data.stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
+    public List<Product> getBySupplier(Supplier supplier) {
+        return data.stream().filter(t -> t.getSupplierMem().equals(supplier)).collect(Collectors.toList());
     }
 
     @Override
-    public List<Product> getBy(ProductCategory productCategory) {
-        return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
+    public List<Product> getByCategory(ProductCategory category) {
+        return data.stream().filter(t -> t.getProductCategoryMem().equals(category)).collect(Collectors.toList());
     }
+
+    @Override
+    public Product getById(int id) {
+        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+    }
+
+    @Override
+    public void add(Product product) {
+        product.setId(data.size() + 1);
+        data.add(product);
+    }
+
+
 }

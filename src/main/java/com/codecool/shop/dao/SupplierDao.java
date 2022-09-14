@@ -6,11 +6,9 @@ import java.util.Set;
 
 public interface SupplierDao {
 
-    void add(Supplier supplier);
-
-    Supplier find(int id);
-
-    void remove(int id);
-
     Set<Supplier> getAll();
+
+    Supplier getById(int id);
+
+    void add(Supplier supplier);
 }

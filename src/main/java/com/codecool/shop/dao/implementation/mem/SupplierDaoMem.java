@@ -24,23 +24,19 @@ public class SupplierDaoMem implements SupplierDao {
     }
 
     @Override
-    public void add(Supplier supplier) {
-        data.add(supplier);
-        supplier.setId(data.size());
-    }
-
-    @Override
-    public Supplier find(int id) {
+    public Supplier getById(int id) {
         return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
-    }
-
-    @Override
-    public void remove(int id) {
-        data.remove(find(id));
     }
 
     @Override
     public Set<Supplier> getAll() {
         return data;
     }
+
+    @Override
+    public void add(Supplier supplier) {
+        data.add(supplier);
+        supplier.setId(data.size());
+    }
+
 }
