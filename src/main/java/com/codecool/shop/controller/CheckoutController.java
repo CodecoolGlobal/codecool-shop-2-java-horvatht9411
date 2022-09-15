@@ -79,12 +79,14 @@ public class CheckoutController extends HttpServlet {
         String cvv = request.getParameter("cvv");
         Order order = new Order(name, userId, email, city, address, zipCode, state, cardName, cardNumber, expMonth, expYear, cvv);
         int cartId = productService.saveOrder(order);
-        Map<Product, Integer> products = (Map<Product, Integer>) session.getAttribute("cart");
-        for (Map.Entry<Product, Integer> product : products.entrySet()) {
+        if (session.getAttribute("cart") != null){
+            Map<Product, Integer> products = (Map<Product, Integer>) session.getAttribute("cart");
+            for (Map.Entry<Product, Integer> product : products.entrySet()) {
             OrderDetail orderDetail = new OrderDetail(product.getKey().getId(), product.getValue(), cartId);
             productService.saveOrderDetails(orderDetail);
         }
-        ((Map<?, ?>) session.getAttribute("cart")).clear();
+            ((Map<?, ?>) session.getAttribute("cart")).clear();
+        }
         response.sendRedirect("/confirm");
     }
 
