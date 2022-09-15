@@ -13,9 +13,11 @@
             <input class="navbar-searchbar" type="text" id="search-input">
             <button class="button-search" type="submit"><i class='fa-solid fa-magnifying-glass'></i></button>
         </form>
-        <div class="navbar-toolbox">
-            <a href="/registration" class="nav-link">Regisztráció</a>
-            <a href="/login" class="nav-link">Bejelentkezés</a>
+        <div class="navbar-toolbox" th:with="condition=${message != null}">
+            <p th:if="${condition}" class="nav-link" th:text="${message}"></p>
+            <a th:if="${condition}" href="/" class="nav-link">Kijelentkezés</a>
+            <a th:unless="${condition}" href="/registration" class="nav-link">Regisztráció</a>
+            <a th:unless="${condition}" href="/login" class="nav-link">Bejelentkezés</a>
             <a href="/cart" class="nav-link">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <i class="cart-qty">0</i>
@@ -25,7 +27,7 @@
     </nav>
     <nav class="navbar-filter">
         <ul>
-            <li class="filter-menu"><a href="/">Minden Kategória</a>
+            <li class="filter-menu"><a href="/" class="filter-name">Minden Kategória</a>
                 <ul class="filter-submenu">
                     <li th:each="cat : ${category}">
                         <a class="filter-category" th:text="${cat.name}" th:attr="data-api=${cat.id}"/>
@@ -35,7 +37,7 @@
         </ul>
 
         <ul>
-            <li class="filter-menu"><a href="/">Minden Márka</a>
+            <li class="filter-menu"><a href="/" class="filter-name">Minden Márka</a>
                 <ul class="filter-submenu">
                     <li th:each="supplier : ${supplier}" th:value="${supplier.id}">
                         <a class="filter-supplier" th:text="${supplier.name}" th:attr="data-api=${supplier.id}"/>

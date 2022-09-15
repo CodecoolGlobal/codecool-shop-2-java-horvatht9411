@@ -18,7 +18,7 @@ public class OrderDetailDaoJdbc implements OrderDetailDao {
         @Override
         public void add(OrderDetail orderDetail) {
             try (Connection conn = dataSource.getConnection()) {
-                String sql = "INSERT INTO orderdetails (product_id, quantity, cart_id) VALUES (?, ?, ?)";
+                String sql = "INSERT INTO orderdetails (product_id, quantity, order_id) VALUES (?, ?, ?)";
                 PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 statement.setInt(1, orderDetail.getProductId());
                 statement.setInt(2, orderDetail.getQuantity());
