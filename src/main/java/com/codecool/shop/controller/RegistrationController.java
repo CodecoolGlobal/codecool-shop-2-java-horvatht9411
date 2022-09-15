@@ -5,8 +5,6 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.LogService;
 import com.codecool.shop.service.UserService;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -15,10 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.Type;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/registration"})
@@ -48,8 +45,9 @@ public class RegistrationController extends HttpServlet {
         if (isNewUser(email)) {
             try {
                 byte[] salt = PasswordHashing.generateSalt();
-                byte[] hashedPassword = PasswordHashing.hashPassword(password, salt);
-                User newUser = new User(userName, email, hashedPassword, salt);
+                String hashedPassword = Arrays.toString(PasswordHashing.hashPassword(password, salt));
+                String saltToSave = Arrays.toString(salt);;
+                User newUser = new User(userName, email, hashedPassword, saltToSave);
                 userService.addNewUser(newUser);
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
                 throw new RuntimeException(e);
