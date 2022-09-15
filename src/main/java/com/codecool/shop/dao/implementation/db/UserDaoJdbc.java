@@ -24,7 +24,7 @@ public class UserDaoJdbc implements UserDao {
             Set<User> result = new HashSet<>();
             while (resultSet.next()) {
                 User user = new User(resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getBytes(4), resultSet.getBytes(5));
+                        resultSet.getString(4), resultSet.getString(5));
                 user.setId(resultSet.getInt(1));
                 result.add(user);
             }
@@ -45,7 +45,7 @@ public class UserDaoJdbc implements UserDao {
                 return null;
             }
             User user = new User(resultSet.getString(2), resultSet.getString(3),
-                    resultSet.getBytes(4), resultSet.getBytes(5));
+                    resultSet.getString(4), resultSet.getString(5));
             user.setId(resultSet.getInt(1));
             return user;
         } catch (SQLException e) {
@@ -60,8 +60,8 @@ public class UserDaoJdbc implements UserDao {
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
-            statement.setBytes(3, user.getHashedPassword());
-            statement.setBytes(4, user.getSalt());
+            statement.setString(3, user.getHashedPassword());
+            statement.setString(4, user.getSalt());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
