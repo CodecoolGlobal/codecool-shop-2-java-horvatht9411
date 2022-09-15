@@ -45,28 +45,28 @@
     <div class="row">
         <div class="col-75">
             <div class="container">
-                <form action="/action_page.php">
+            <form method="post">
 
                     <div class="row">
                         <div class="col-50">
                             <h3>Számlázási cím</h3>
                             <label for="fname"><i class="fa fa-user"></i> Név</label>
-                            <input type="text" id="fname" name="firstname" placeholder="Rend Elek">
+                            <input type="text" id="fname" name="name" placeholder="Rend Elek" required="required">
                             <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                            <input type="text" id="email" name="email" placeholder="rend@elek.com">
+                            <input type="text" id="email" name="email" placeholder="rend@elek.com" required="required">
                             <label for="city"><i class="fa fa-institution"></i> Város</label>
-                            <input type="text" id="city" name="city" placeholder="Település">
+                            <input type="text" id="city" name="city" placeholder="Település" required="required">
                             <label for="adr"><i class="fa fa-address-card-o"></i>Cím</label>
-                            <input type="text" id="adr" name="address" placeholder="Utca 2">
+                            <input type="text" id="adr" name="address" placeholder="Utca 2" required="required">
 
                             <div class="row">
                                 <div class="col-50">
                                     <label for="state">Megye</label>
-                                    <input type="text" id="state" name="state" placeholder="Pest">
+                                    <input type="text" id="state" name="state" placeholder="Pest" required="required">
                                 </div>
                                 <div class="col-50">
                                     <label for="zip">Irányítószám</label>
-                                    <input type="text" id="zip" name="zip" placeholder="1234">
+                                    <input type="text" id="zip" name="zip" placeholder="1234" required="required">
                                 </div>
                             </div>
                         </div>
@@ -81,20 +81,20 @@
                                 <i class="fa fa-cc-discover" style="color:orange;"></i>
                             </div>
                             <label for="cname">Kártyán szereplő név</label>
-                            <input type="text" id="cname" name="cardname" placeholder="Rend Elek">
+                            <input type="text" id="cname" name="cardname" placeholder="Rend Elek" required="required">
                             <label for="ccnum">Kártya száma</label>
-                            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required="required">
                             <label for="expmonth">Lejárati hónap</label>
-                            <input type="text" id="expmonth" name="expmonth" placeholder="Szeptember">
+                            <input type="text" id="expmonth" name="expmonth" placeholder="Szeptember" required="required">
 
                             <div class="row">
                                 <div class="col-50">
                                     <label for="expyear">Lejárati év</label>
-                                    <input type="text" id="expyear" name="expyear" placeholder="2018">
+                                    <input type="text" id="expyear" name="expyear" placeholder="2018" required="required">
                                 </div>
                                 <div class="col-50">
                                     <label for="cvv">CVV</label>
-                                    <input type="text" id="cvv" name="cvv" placeholder="123">
+                                    <input type="text" id="cvv" name="cvv" placeholder="123" required="required">
                                 </div>
                             </div>
                         </div>
@@ -103,13 +103,13 @@
                     <label>
                         <input type="checkbox" checked="checked" name="sameadr"> A szállítási cím megegyezik a számlázási címmel
                     </label>
-                    <a class="btn btn-success add-to-cart" href="/confirm">Rendelés véglegesítése</a>
+                    <button type="submit" class="btn btn-success add-to-cart">Rendelés véglegesítése</button>
                 </form>
             </div>
         </div>
 
-        <div class="col-25">
-            <div class="container">
+        <div class="col-25" th:if="${cartItems}">
+            <div class="container cart-checkout">
                 <h4>Kosár
                     <span class="price" style="color:black">
           <i class="fa fa-shopping-cart"></i>

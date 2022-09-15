@@ -1,0 +1,42 @@
+@media (max-width: 800px) {
+    .row {
+        flex-direction: column-reverse;
+    }
+
+    .col-25 {
+        margin-bottom: 20px;
+    }
+}
+
+
+
+.container {
+    background-color: #dce9ef;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    height: 400px;
+    width: 300px;
+}
+
+.user-data {
+    text-align: center;
+}
+
+#main-title {
+    padding: 15px;
+    font-weight: bold;
+}
+
+.user-data input {
+    border-radius: 5px;
+    display: revert;
+}
+
+.user-data label {
+    display: block;
+    text-align: left;
+}
+
