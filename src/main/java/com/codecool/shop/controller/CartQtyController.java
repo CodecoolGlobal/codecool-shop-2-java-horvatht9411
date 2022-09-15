@@ -40,10 +40,16 @@ public class CartQtyController extends HttpServlet {
 
             int productId = ControllerUtil.retrieveProductId(request);
             Product product = productService.findProduct(productId);
-            checkCart(productId, product);
+
+//            if (cart.containsKey(product)) {
+//                cart.merge(product, 1, Integer::sum);
+//            } else {
+//                cart.put(product, 1);
+//            }
+
+            checkCart(product);
 
             session.setAttribute("cart", cart);
-            System.out.println(cart);
 
             int quantity = getCartQty();
             ControllerUtil.initResponse(response, quantity);
@@ -52,17 +58,17 @@ public class CartQtyController extends HttpServlet {
         }
     }
 
-    private void checkCart(int productId, Product product) {
+    private void checkCart(Product product) {
         if (!cart.isEmpty()) {
             for (Map.Entry<Product, Integer> item : cart.entrySet()) {
-                if (item.getKey().getId() == productId) {
+                if (item.getKey().equals(product)) {
                     var value = item.getValue();
                     item.setValue(value + 1);
                 }
             }
             int counter = 0;
             for (Product item : cart.keySet()) {
-                if (item.getId() == productId) {
+                if (item.equals(product)) {
                     counter++;
                 }
             }
