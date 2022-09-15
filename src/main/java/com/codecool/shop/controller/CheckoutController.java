@@ -1,8 +1,13 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.model.Order;
+import com.codecool.shop.model.Product;
+
+import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.service.LogService;
+import com.codecool.shop.service.ProductService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -15,11 +20,17 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.HashMap;
+import java.util.Map;
+
 
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutController extends HttpServlet {
 
     private Map<Product, Integer> cart = new HashMap<>();
+    ProductService productService = new ProductService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -48,5 +59,34 @@ public class CheckoutController extends HttpServlet {
             LogService.log(e);
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //TODO: implement post method
+        HttpSession session = request.getSession();
+        int userId;
+//        if (session.getAttribute("user") != null) {
+//            userId = (int) session.getAttribute("user").getId();
+//        } else {
+            userId = 0;
+//        }
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String city = request.getParameter("city");
+        String address = request.getParameter("address");
+        int zipCode = Integer.parseInt(request.getParameter("zip"));
+        String state = request.getParameter("state");
+        String cardName = request.getParameter("cardname");
+        String cardNumber = request.getParameter("cardnumber");
+        String expMonth = request.getParameter("expmonth");
+        String expYear = request.getParameter("expyear");
+        String cvv = request.getParameter("cvv");
+        Order order = new Order(name, userId, email, city, address, zipCode, state, cardName, cardNumber, expMonth, expYear, cvv);
+        int cartId = productService.saveOrder(order);
+        System.out.println(cartId);
+        // TODO implement orderdeatils
+        response.sendRedirect("/confirm");
+    }
+
 }
 

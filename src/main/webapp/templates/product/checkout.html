@@ -45,13 +45,13 @@
     <div class="row">
         <div class="col-75">
             <div class="container">
-                <form action="/action_page.php">
+            <form method="post">
 
                     <div class="row">
                         <div class="col-50">
                             <h3>Számlázási cím</h3>
                             <label for="fname"><i class="fa fa-user"></i> Név</label>
-                            <input type="text" id="fname" name="firstname" placeholder="Rend Elek">
+                            <input type="text" id="fname" name="name" placeholder="Rend Elek">
                             <label for="email"><i class="fa fa-envelope"></i> Email</label>
                             <input type="text" id="email" name="email" placeholder="rend@elek.com">
                             <label for="city"><i class="fa fa-institution"></i> Város</label>
@@ -103,7 +103,7 @@
                     <label>
                         <input type="checkbox" checked="checked" name="sameadr"> A szállítási cím megegyezik a számlázási címmel
                     </label>
-                    <a class="btn btn-success add-to-cart" href="/confirm">Rendelés véglegesítése</a>
+                    <button type="submit" class="btn btn-success add-to-cart">Rendelés véglegesítése</button>
                 </form>
             </div>
         </div>

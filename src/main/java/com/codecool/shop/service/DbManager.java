@@ -1,14 +1,8 @@
 package com.codecool.shop.service;
 
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.dao.implementation.db.UserDaoJdbc;
-import com.codecool.shop.dao.implementation.db.ProductCategoryDaoJdbc;
-import com.codecool.shop.dao.implementation.db.ProductDaoJdbc;
-import com.codecool.shop.dao.implementation.db.SupplierDaoJdbc;
+import com.codecool.shop.dao.implementation.db.*;
 import com.codecool.shop.dao.implementation.mem.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.mem.ProductDaoMem;
 import org.postgresql.ds.PGSimpleDataSource;
@@ -26,6 +20,7 @@ public class DbManager {
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
     private SupplierDao supplierDao;
+    private OrderDao orderDao;
 
     private final Properties appProps = new Properties();
 
@@ -60,6 +55,7 @@ public class DbManager {
         productDao = new ProductDaoJdbc(dataSource);
         productCategoryDao = new ProductCategoryDaoJdbc(dataSource);
         supplierDao = new SupplierDaoJdbc(dataSource);
+        orderDao = new OrderDaoJdbc(dataSource);
     }
 
     private void setupMEM() {
@@ -98,4 +94,6 @@ public class DbManager {
         return supplierDao;
     }
 
+    public OrderDao getOrderDao() { return orderDao;
+    }
 }

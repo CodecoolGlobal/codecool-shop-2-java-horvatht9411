@@ -52,7 +52,7 @@ CREATE TABLE orders
     email       TEXT    NOT NULL,
     city        TEXT    NOT NULL,
     address     TEXT    NOT NULL,
-    zip_code    INTEGER NULL,
+    zip_code    INTEGER NOT NULL,
     state       TEXT    NOT NULL,
     card_name   TEXT    NOT NULL,
     card_number TEXT    NOT NULL,
