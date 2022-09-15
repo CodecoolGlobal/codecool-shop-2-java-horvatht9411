@@ -2,8 +2,8 @@ DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS productCategory;
 DROP TABLE IF EXISTS suppliers;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS orderDetails;
+DROP TABLE IF EXISTS orders;
 
 
 CREATE TABLE productCategory
@@ -38,34 +38,35 @@ CREATE TABLE product
 CREATE TABLE users
 (
     id       SERIAL PRIMARY KEY,
-    name     TEXT NOT NULL,
+    name     TEXT        NOT NULL,
     email    TEXT UNIQUE NOT NULL,
     password TEXT        NOT NULL,
-    salt TEXT NOT NULL
+    salt     TEXT        NOT NULL
 );
 
 CREATE TABLE orders
 (
-    id          SERIAL  NOT NULL PRIMARY KEY,
+    id          SERIAL NOT NULL PRIMARY KEY,
     user_id     INTEGER,
-    name        TEXT    NOT NULL,
-    email       TEXT    NOT NULL,
-    city        TEXT    NOT NULL,
-    address     TEXT    NOT NULL,
-    zip_code    INTEGER NULL,
-    state       TEXT    NOT NULL,
-    card_name   TEXT    NOT NULL,
-    card_number TEXT    NOT NULL,
-    exp_month   TEXT    NOT NULL,
-    exp_year    TEXT    NOT NULL,
-    cvv         TEXT    NOT NULL
+    name        TEXT   NOT NULL,
+    email       TEXT   NOT NULL,
+    city        TEXT   NOT NULL,
+    address     TEXT   NOT NULL,
+    zip_code    TEXT   NOT NULL,
+    state       TEXT   NOT NULL,
+    card_name   TEXT   NOT NULL,
+    card_number TEXT   NOT NULL,
+    exp_month   TEXT   NOT NULL,
+    exp_year    TEXT   NOT NULL,
+    cvv         TEXT   NOT NULL
 );
 
 CREATE TABLE orderDetails
 (
+    id         SERIAL  NOT NULL PRIMARY KEY,
     product_id INTEGER NOT NULL,
     quantity   INTEGER NOT NULL,
-    cart_id    INTEGER REFERENCES orders (id)
+    order_id   INTEGER REFERENCES orders (id)
 );
 
 
