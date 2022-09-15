@@ -45,7 +45,8 @@ public class CartQtyController extends HttpServlet {
 
             int productId = ControllerUtil.retrieveProductId(request);
             Product product = productService.findProduct(productId);
-            cart.put(product, cart.getOrDefault(product, 0) + 1);
+            checkCart(productId, product);
+
             session.setAttribute("cart", cart);
             System.out.println(cart);
 
@@ -55,6 +56,26 @@ public class CartQtyController extends HttpServlet {
             out.flush();
         } catch (NullPointerException e) {
             LogService.log(e);
+        }
+    }
+
+    private void checkCart(int productId, Product product) {
+        if (!cart.isEmpty()) {
+            for (Map.Entry<Product, Integer> item : cart.entrySet()) {
+                if (item.getKey().getId() == productId) {
+                    var value = item.getValue();
+                    item.setValue(value + 1);
+                }
+            }
+            int counter = 0;
+            for (Product item : cart.keySet()) {
+                if (item.getId() == productId) {
+                    counter++;
+                }
+            }
+            if (counter == 0) cart.put(product, 1);
+        } else {
+            cart.put(product, 1);
         }
     }
 
