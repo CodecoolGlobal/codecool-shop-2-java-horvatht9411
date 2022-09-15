@@ -55,6 +55,14 @@ public class LoginController extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+//        session.invalidate();
+        session.removeAttribute("user");
+        ((Map<?, ?>) session.getAttribute("cart")).clear();
+    }
+
     private boolean isValidLogin(String email, String password, HttpServletRequest request) throws NoSuchAlgorithmException, InvalidKeySpecException {
         User registeredUser = userService.getUserByEmail(email);
         if (registeredUser != null) {
@@ -73,4 +81,5 @@ public class LoginController extends HttpServlet {
         }
         return false;
     }
+
 }
