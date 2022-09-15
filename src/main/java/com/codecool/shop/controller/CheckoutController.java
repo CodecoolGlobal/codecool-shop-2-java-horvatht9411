@@ -5,6 +5,7 @@ import com.codecool.shop.model.Order;
 import com.codecool.shop.model.OrderDetail;
 import com.codecool.shop.model.Product;
 
+import com.codecool.shop.model.User;
 import com.codecool.shop.service.LogService;
 import com.codecool.shop.service.ProductService;
 import org.thymeleaf.TemplateEngine;
@@ -59,11 +60,12 @@ public class CheckoutController extends HttpServlet {
         //TODO: implement saving with existing user
         HttpSession session = request.getSession();
         int userId;
-//        if (session.getAttribute("user") != null) {
-//            userId = (int) session.getAttribute("user").getId();
-//        } else {
+        if (session.getAttribute("user") != null) {
+            var user = (User) session.getAttribute("user");
+            userId = user.getId();
+        } else {
             userId = 0;
-//        }
+        }
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String city = request.getParameter("city");
