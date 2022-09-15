@@ -53,7 +53,6 @@ async function checkUser(username) {
         login = confirm("Sikeres regisztráció!\nKérem, jelentkezzen be!");
     }
     if (login) {
-        console.log("ez login");
         window.location.href = "/login";
     }
 }
