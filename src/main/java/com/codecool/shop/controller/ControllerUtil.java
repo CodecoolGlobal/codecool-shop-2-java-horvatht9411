@@ -23,16 +23,43 @@ public class ControllerUtil {
         return Integer.parseInt(pathInfo);
     }
 
-    static PrintWriter initResponse(HttpServletResponse response) {
+    static void initResponse(HttpServletResponse response, String answer) {
         try {
             PrintWriter out = response.getWriter();
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            return out;
+            String json = new Gson().toJson(answer);
+            out.println(json);
+            out.flush();
         } catch (IOException e) {
             LogService.log(e);
         }
-        return null;
+    }
+
+    static void initResponse(HttpServletResponse response, int answer) {
+        try {
+            PrintWriter out = response.getWriter();
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            String json = new Gson().toJson(answer);
+            out.println(json);
+            out.flush();
+        } catch (IOException e) {
+            LogService.log(e);
+        }
+    }
+
+    static void initResponse(HttpServletResponse response, int[] answer) {
+        try {
+            PrintWriter out = response.getWriter();
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            String json = new Gson().toJson(answer);
+            out.println(json);
+            out.flush();
+        } catch (IOException e) {
+            LogService.log(e);
+        }
     }
 
     static String inputStreamToString(InputStream inputStream) {
@@ -40,7 +67,7 @@ public class ControllerUtil {
         return scanner.hasNext() ? scanner.useDelimiter("\\A").next() : "";
     }
 
-    static List<String> getDataList(String jsonData){
+    static List<String> getDataList(String jsonData) {
         Type jsonDataListType = new TypeToken<List<String>>() {
         }.getType();
         Gson gson = new Gson();

@@ -54,16 +54,10 @@ public class RegistrationController extends HttpServlet {
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
                 throw new RuntimeException(e);
             }
-            PrintWriter out = ControllerUtil.initResponse(response);
             String answer = "";
-            String json = new Gson().toJson(answer);
-            out.println(json);
-            out.flush();
+            ControllerUtil.initResponse(response, answer);
         } else {
-            PrintWriter out = ControllerUtil.initResponse(response);
-            String json = new Gson().toJson(userName);
-            out.println(json);
-            out.flush();
+            ControllerUtil.initResponse(response, userName);
         }
     }
 
