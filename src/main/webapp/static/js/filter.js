@@ -38,7 +38,7 @@ function cardBuilder(category) {
         let header = createDiv("card-header");
         let title = createElement("h4");
         title.innerText = cat["name"];
-        addToClassList(title, "card-title");
+        addToClassList(title, ["card-title"]);
         let headerText = createElement("p");
         headerText.innerText = cat["description"];
         addToClassList(headerText, ["card-text", "description"]);
@@ -48,7 +48,7 @@ function cardBuilder(category) {
         let cardText = createDiv("card-text");
         let cardTextParagraph = createElement("p");
         cardTextParagraph.innerText = cat["defaultPrice"] + " " + cat["defaultCurrency"];
-        addToClassList(cardTextParagraph, "lead");
+        addToClassList(cardTextParagraph, ["lead"]);
         cardText.append(cardTextParagraph);
 
         let button = createElement("button");
@@ -63,11 +63,15 @@ function cardBuilder(category) {
         cardBody.append(cardText);
         cardBody.append(cardText2);
 
+        let imgContainer = createDiv("image-container");
+
         let image = createElement("img");
         image.src = cat["imgURL"];
-        addToClassList(image, "prod-image")
+        addToClassList(image, ["prod-image"]);
 
-        card.append(image);
+        imgContainer.append(image);
+
+        card.append(imgContainer);
         card.append(header);
         card.append(cardBody);
         cardItem.append(card);
