@@ -16,7 +16,7 @@
             <p th:if="${condition}" class="nav-link" th:text="${message}"></p>
             <a th:if="${condition}" href="/" class="nav-link">Kijelentkezés</a>
             <a th:unless="${condition}" href="/registration" id="login" class="nav-link">Regisztráció</a>
-            <a th:unless="${condition}" href="/login" id="register" class="nav-link">Bejelentkezés</a>
+            <a th:unless="${condition}" href="/login" id="reg" class="nav-link">Bejelentkezés</a>
             <a href="/cart" class="nav-link">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <i class="cart-qty">0</i>
