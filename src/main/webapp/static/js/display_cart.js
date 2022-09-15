@@ -3,8 +3,6 @@ const priceSum = document.querySelectorAll(".price-sum");
 const itemQuantity = document.querySelectorAll(".quantity");
 const deleteButton = document.querySelectorAll(".delete-item");
 const tableBody = document.querySelector("tbody");
-const cartQty = document.querySelector(".cart-qty");
-const searchBar = document.querySelector("#search-input");
 
 async function editCart() {
     for (let input of itemQuantity) {
@@ -46,11 +44,6 @@ function totalPrices() {
     totalPrice.textContent = total.toString();
 }
 
-function hideCartQty() {
-    searchBar.parentElement.textContent = '';
-    cartQty.parentElement.textContent = '';
-}
-
 async function apiPut(url, data) {
     const response = await fetch(url, {
         method: 'PUT',
@@ -72,7 +65,6 @@ async function apiDelete(url) {
 }
 
 window.onload = async () => {
-    hideCartQty();
     totalPrices();
     await editCart();
     await deleteItemFromCart();

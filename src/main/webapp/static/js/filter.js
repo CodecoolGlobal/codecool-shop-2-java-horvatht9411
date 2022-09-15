@@ -2,6 +2,7 @@ const categoryMenu = document.querySelectorAll(".filter-category");
 const supplierMenu = document.querySelectorAll(".filter-supplier");
 const content = document.querySelector("#products");
 
+
 async function initCategoryMenu() {
     categoryMenu.forEach(category => category.addEventListener("click", async () => {
         let selectedCategoryId = category.dataset.api;
@@ -22,6 +23,8 @@ async function initSupplierMenu() {
         cardBuilder(selectedSupplier);
     }));
 }
+
+
 
 async function getSelectedSupplier(supplier) {
     const url = `/api/supplier?supplier=${supplier}`;

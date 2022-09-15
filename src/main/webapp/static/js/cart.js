@@ -11,6 +11,7 @@ function addToCart() {
     }
 }
 
+
 function sendProductToCart(id, productId) {
     const url = `/api/editCart/${id}`;
     return apiPost(url, productId);
@@ -48,6 +49,10 @@ async function apiPost(url, payload) {
         console.log(response.statusText);
     }
 }
+
+
+
+
 
 window.onload = async () => {
     await updateCartQty();
