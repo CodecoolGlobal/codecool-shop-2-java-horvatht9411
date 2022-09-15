@@ -6,7 +6,7 @@ public class Order extends BaseModel {
     String email;
     String city;
     String address;
-    int zipCode;
+    String zipCode;
     String state;
     String cardName;
     String cardNumber;
@@ -14,7 +14,7 @@ public class Order extends BaseModel {
     String expYear;
     String cvv;
 
-    public Order(String name, int userId, String email, String city, String address, int zipCode, String state, String cardName, String cardNumber, String expMonth, String expYear, String cvv) {
+    public Order(String name, int userId, String email, String city, String address, String zipCode, String state, String cardName, String cardNumber, String expMonth, String expYear, String cvv) {
         super(name);
         this.userId = userId;
         this.email = email;
@@ -46,7 +46,7 @@ public class Order extends BaseModel {
         return address;
     }
 
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 

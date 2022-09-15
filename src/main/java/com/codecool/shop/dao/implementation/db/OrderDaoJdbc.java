@@ -25,7 +25,7 @@ public class OrderDaoJdbc implements OrderDao {
             statement.setString(3, order.getEmail());
             statement.setString(4, order.getCity());
             statement.setString(5, order.getAddress());
-            statement.setInt(6, order.getZipCode());
+            statement.setString(6, order.getZipCode());
             statement.setString(7, order.getState());
             statement.setString(8, order.getCardName());
             statement.setString(9, order.getCardNumber());

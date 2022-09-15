@@ -2,10 +2,9 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.OrderDetail;
 import com.codecool.shop.model.Product;
 
-import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.model.Product;
 import com.codecool.shop.service.LogService;
 import com.codecool.shop.service.ProductService;
 import org.thymeleaf.TemplateEngine;
@@ -17,11 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,7 +56,7 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //TODO: implement post method
+        //TODO: implement saving with existing user
         HttpSession session = request.getSession();
         int userId;
 //        if (session.getAttribute("user") != null) {
@@ -74,7 +68,7 @@ public class CheckoutController extends HttpServlet {
         String email = request.getParameter("email");
         String city = request.getParameter("city");
         String address = request.getParameter("address");
-        int zipCode = Integer.parseInt(request.getParameter("zip"));
+        String zipCode = request.getParameter("zip");
         String state = request.getParameter("state");
         String cardName = request.getParameter("cardname");
         String cardNumber = request.getParameter("cardnumber");
@@ -83,8 +77,12 @@ public class CheckoutController extends HttpServlet {
         String cvv = request.getParameter("cvv");
         Order order = new Order(name, userId, email, city, address, zipCode, state, cardName, cardNumber, expMonth, expYear, cvv);
         int cartId = productService.saveOrder(order);
-        System.out.println(cartId);
-        // TODO implement orderdeatils
+        Map<Product, Integer> products = (Map<Product, Integer>) session.getAttribute("cart");
+        for (Map.Entry<Product, Integer> product : products.entrySet()) {
+            OrderDetail orderDetail = new OrderDetail(product.getKey().getId(), product.getValue(), cartId);
+            productService.saveOrderDetails(orderDetail);
+        }
+        ((Map<?, ?>) session.getAttribute("cart")).clear();
         response.sendRedirect("/confirm");
     }
 

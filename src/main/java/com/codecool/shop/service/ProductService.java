@@ -1,9 +1,6 @@
 package com.codecool.shop.service;
 
-import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.model.*;
 
 import java.util.List;
@@ -17,6 +14,8 @@ public class ProductService {
 
     private OrderDao orderDao;
 
+    private OrderDetailDao orderDetailDao;
+
 
     public ProductService() {
         DbManager manager = new DbManager();
@@ -25,6 +24,7 @@ public class ProductService {
         productCategoryDao = manager.getProductCategoryDao();
         supplierDao = manager.getSupplierDao();
         orderDao = manager.getOrderDao();
+        orderDetailDao = manager.getOrderDetailDao();
 
     }
 
@@ -57,5 +57,8 @@ public class ProductService {
 
     public int saveOrder(Order order) {
         return orderDao.add(order);
+    }
+    public void saveOrderDetails(OrderDetail orderDetail) {
+        orderDetailDao.add(orderDetail);
     }
 }
