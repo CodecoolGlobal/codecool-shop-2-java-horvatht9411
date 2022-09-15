@@ -2,10 +2,10 @@ package com.codecool.shop.model;
 
 public class User extends BaseModel{
     private final String email;
-    private final byte[] hashedPassword;
-    private final byte[] salt;
+    private final String hashedPassword;
+    private final String salt;
 
-    public User(String name, String email, byte[] hashedPassword, byte[] salt) {
+    public User(String name, String email, String hashedPassword, String salt) {
         super(name);
         this.email = email;
         this.hashedPassword = hashedPassword;
@@ -16,11 +16,11 @@ public class User extends BaseModel{
         return email;
     }
 
-    public byte[] getHashedPassword() {
+    public String getHashedPassword() {
         return hashedPassword;
     }
 
-    public byte[] getSalt() {
+    public String getSalt() {
         return salt;
     }
 }
