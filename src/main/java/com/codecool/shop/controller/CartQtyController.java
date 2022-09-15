@@ -23,11 +23,8 @@ public class CartQtyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
-            PrintWriter out = ControllerUtil.initResponse(response);
             int quantity = getCartQty();
-            String var = new Gson().toJson(quantity);
-            out.println(var);
-            out.flush();
+            ControllerUtil.initResponse(response, quantity);
         } catch (NullPointerException e) {
             LogService.log(e);
         }
@@ -36,8 +33,6 @@ public class CartQtyController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
-            PrintWriter out = ControllerUtil.initResponse(response);
-
             HttpSession session = request.getSession();
             if (session.getAttribute("cart") != null) {
                 cart = (Map<Product, Integer>) session.getAttribute("cart");
@@ -50,9 +45,7 @@ public class CartQtyController extends HttpServlet {
             System.out.println(cart);
 
             int quantity = getCartQty();
-            String json = new Gson().toJson(quantity);
-            out.println(json);
-            out.flush();
+            ControllerUtil.initResponse(response, quantity);
         } catch (NullPointerException e) {
             LogService.log(e);
         }
@@ -61,13 +54,10 @@ public class CartQtyController extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) {
         try {
-            PrintWriter out = ControllerUtil.initResponse(response);
-
             HttpSession session = request.getSession();
             if (session.getAttribute("cart") != null) {
                 cart = (Map<Product, Integer>) session.getAttribute("cart");
             }
-
             int productId = ControllerUtil.retrieveProductId(request);
             Product updatedProduct = cart.keySet().stream().filter(product -> product.getId() == productId).findFirst().orElse(null);
             String updatedQuantity = ControllerUtil.inputStreamToString(request.getInputStream());
@@ -79,9 +69,7 @@ public class CartQtyController extends HttpServlet {
             int itemTotal = calculateItemTotal(updatedProduct);
             int bigTotal = calculateBigTotal();
             int[] totals = {itemTotal, bigTotal};
-            String json = new Gson().toJson(totals);
-            out.println(json);
-            out.flush();
+            ControllerUtil.initResponse(response, totals);
         } catch (NullPointerException | IOException e) {
             LogService.log(e);
         }
@@ -90,7 +78,6 @@ public class CartQtyController extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) {
         try {
-            PrintWriter out = ControllerUtil.initResponse(response);
             HttpSession session = request.getSession();
             if (session.getAttribute("cart") != null) {
                 cart = (Map<Product, Integer>) session.getAttribute("cart");
@@ -100,9 +87,7 @@ public class CartQtyController extends HttpServlet {
             cart.remove(deletedProduct);
             session.setAttribute("cart", cart);
             int bigTotal = calculateBigTotal();
-            String data = new Gson().toJson(bigTotal);
-            out.println(data);
-            out.flush();
+            ControllerUtil.initResponse(response, bigTotal);
         } catch (NullPointerException e) {
             LogService.log(e);
         }
