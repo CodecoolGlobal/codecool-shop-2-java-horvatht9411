@@ -40,8 +40,11 @@
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
-                <img class="prod-image"
-                     th:src="${prod.imgURL} ?: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'" alt="product image"/>
+                <div class="image-container">
+                    <img class="prod-image"
+                         th:src="${prod.imgURL} ?: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'"
+                         alt="product image"/>
+                </div>
                 <div class="card-header">
                     <h4 class="card-title" th:text="${prod.name}">Product name</h4>
                     <p class="card-text description" th:text="${prod.description}">Product description... </p>
