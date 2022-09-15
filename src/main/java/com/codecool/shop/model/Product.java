@@ -94,6 +94,17 @@ public class Product extends BaseModel {
         this.supplierMem = supplierMem;
     }
 
+
+
+    @Override
+    public boolean equals(Object product) {
+        if (product instanceof Product){
+            Product item = (Product) product;
+            return this.id == item.getId();
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return String.format("id: %1$d, " +

@@ -38,14 +38,41 @@ public class CartQtyController extends HttpServlet {
 
             int productId = ControllerUtil.retrieveProductId(request);
             Product product = productService.findProduct(productId);
-            cart.put(product, cart.getOrDefault(product, 0) + 1);
+
+//            if (cart.containsKey(product)) {
+//                cart.merge(product, 1, Integer::sum);
+//            } else {
+//                cart.put(product, 1);
+//            }
+
+            checkCart(product);
+
             session.setAttribute("cart", cart);
-            System.out.println(cart);
 
             int quantity = getCartQty();
             ControllerUtil.initResponse(response, quantity);
         } catch (NullPointerException e) {
             LogService.log(e);
+        }
+    }
+
+    private void checkCart(Product product) {
+        if (!cart.isEmpty()) {
+            for (Map.Entry<Product, Integer> item : cart.entrySet()) {
+                if (item.getKey().equals(product)) {
+                    var value = item.getValue();
+                    item.setValue(value + 1);
+                }
+            }
+            int counter = 0;
+            for (Product item : cart.keySet()) {
+                if (item.equals(product)) {
+                    counter++;
+                }
+            }
+            if (counter == 0) cart.put(product, 1);
+        } else {
+            cart.put(product, 1);
         }
     }
 
