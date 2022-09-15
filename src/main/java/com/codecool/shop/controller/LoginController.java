@@ -63,7 +63,7 @@ public class LoginController extends HttpServlet {
             String loginPassword = Arrays.toString(PasswordHashing.hashPassword(password, salt));
             if (savePassword.equals(loginPassword)) {
                 HttpSession session = request.getSession();
-                if (session.getAttribute("user") != null) {
+                if (session.getAttribute("user") == null) {
                     user = registeredUser;
                     session.setAttribute("user", user);
                 }
